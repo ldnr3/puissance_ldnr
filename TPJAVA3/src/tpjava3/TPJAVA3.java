@@ -6,17 +6,12 @@
 package tpjava3;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -54,6 +49,8 @@ public class TPJAVA3 extends Application {
 
         TabPane tabs = new TabPane();
         tabs.getTabs().add(new Dessin());
+        tabs.getTabs().add(new Calcul());
+        tabs.getTabs().add(new Question());
 
         root.setTop(menubar);
         root.setLeft(tabs);
