@@ -10,6 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -18,25 +22,37 @@ import javafx.stage.Stage;
  * @author stag
  */
 public class TPJAVA3 extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello ALEX!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
+
+        BorderPane root = new BorderPane();
+
+        Scene scene = new Scene(root, 800, 400);
+
+        // Création de la Menubar
+        MenuBar menubar = new MenuBar();
+        // Creation des menus de la barre
+        Menu activite = new Menu("_Activité");
+        Menu niveau = new Menu("_Niveau");
+        Menu admin = new Menu("_Administration");
+        // MenuItem du Menu activite
+        MenuItem dessin = new MenuItem("Dessin");
+        MenuItem calcul = new MenuItem("Calcul");
+        MenuItem question = new MenuItem("Question-Réponse");
+        // Assignation du sous menu d'activite
+        activite.getItems().addAll(dessin, calcul, question);
+        // MenuItem du Menu niveau
+        MenuItem niv1 = new MenuItem("Niveau 1");
+        MenuItem niv2 = new MenuItem("Niveau 2");
+        //Assignation du sous menu de niveau
+        niveau.getItems().addAll(niv1, niv2);
+        // Assignation des menu à la menubar
+        menubar.getMenus().addAll(activite, niveau, admin);
+
+        root.setTop(menubar);
+
+        primaryStage.setTitle("Jeux d'Enfants");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -47,5 +63,5 @@ public class TPJAVA3 extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
