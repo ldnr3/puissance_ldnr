@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -50,7 +52,11 @@ public class TPJAVA3 extends Application {
         // Assignation des menu à la menubar
         menubar.getMenus().addAll(activite, niveau, admin);
 
+        TabPane tabs = new TabPane();
+        tabs.getTabs().add(new Dessin());
+
         root.setTop(menubar);
+        root.setLeft(tabs);
 
         primaryStage.setTitle("Jeux d'Enfants");
         primaryStage.setScene(scene);
