@@ -53,7 +53,7 @@ public class TPJAVA3 extends Application {
         tabs.getTabs().add(new Question());
 
         root.setTop(menubar);
-        root.setLeft(tabs);
+        root.setCenter(tabs);
 
         primaryStage.setTitle("Jeux d'Enfants");
         primaryStage.setScene(scene);
