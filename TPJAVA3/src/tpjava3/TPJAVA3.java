@@ -57,18 +57,20 @@ public class TPJAVA3 extends Application {
         tabs.getTabs().add(new Dessin());
         tabs.getTabs().add(new Quizz("Calcul"));
         tabs.getTabs().add(new Question());
-        tabs.getTabs().add(new Administration());
-
-        root.setTop(menubar);
-        root.setCenter(tabs);
-        
-        primaryStage.setTitle("Jeux d'Enfants");
 
         connexion.setOnAction(event -> {
             pop = new Popup();
             pop.login();
+            String s = null;
+            if (pop.verifLogin(s) == true) {
+                tabs.getTabs().add(new Administration());
+            }
         });
 
+        root.setTop(menubar);
+        root.setCenter(tabs);
+
+        primaryStage.setTitle("Jeux d'Enfants");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
