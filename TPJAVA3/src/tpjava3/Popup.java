@@ -10,6 +10,10 @@ public class Popup extends Parent {
 
     }
 
+    public boolean verifLogin(String s) {
+        return true;
+    }
+
     public void login() {
 
         TextInputDialog dialog = new TextInputDialog();
@@ -18,8 +22,9 @@ public class Popup extends Parent {
 
         Optional<String> login = dialog.showAndWait();
         if (login.isPresent()) {
-            System.out.println("Mot de passe : " + login.get());
+            //  System.out.println("Mot de passe : " + login.get());
+            verifLogin(login.get());
         }
-    }
 
+    }
 }
