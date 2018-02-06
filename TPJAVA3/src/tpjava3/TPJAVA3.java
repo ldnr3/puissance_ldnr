@@ -20,6 +20,8 @@ import javafx.stage.Stage;
  */
 public class TPJAVA3 extends Application {
 
+    private Popup pop;
+
     @Override
     public void start(Stage primaryStage) {
 
@@ -44,6 +46,10 @@ public class TPJAVA3 extends Application {
         MenuItem niv2 = new MenuItem("Niveau 2");
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
+        //Assignation du sous menu Connexion
+        MenuItem connexion = new MenuItem("Connexion");
+        admin.getItems().addAll(connexion);
+
         // Assignation des menu à la menubar
         menubar.getMenus().addAll(activite, niveau, admin);
 
@@ -51,11 +57,18 @@ public class TPJAVA3 extends Application {
         tabs.getTabs().add(new Dessin());
         tabs.getTabs().add(new Quizz("Calcul"));
         tabs.getTabs().add(new Question());
+        tabs.getTabs().add(new Administration());
 
         root.setTop(menubar);
         root.setCenter(tabs);
 
         primaryStage.setTitle("Jeux d'Enfants");
+
+        connexion.setOnAction(event -> {
+            pop = new Popup();
+            pop.login();
+        });
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
