@@ -57,6 +57,7 @@ public class TPJAVA3 extends Application {
         tabs.getTabs().add(new Dessin());
         tabs.getTabs().add(new Calcul());
         tabs.getTabs().add(new Question());
+        tabs.getTabs().add(new Administration());
 
         root.setTop(menubar);
         root.setCenter(tabs);
