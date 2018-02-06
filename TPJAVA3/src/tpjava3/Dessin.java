@@ -5,7 +5,6 @@
  */
 package tpjava3;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -18,8 +17,6 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
