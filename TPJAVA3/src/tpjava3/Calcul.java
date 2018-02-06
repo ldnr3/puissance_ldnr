@@ -10,9 +10,10 @@ public class Calcul extends QGenerator {
     
     private int operande1;
     private int operande2;
+    private String operateur;
 
-    Calcul() {
-        
+    public Calcul(int niveau) {
+      
     }
 
     @Override
