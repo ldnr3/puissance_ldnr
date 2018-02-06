@@ -49,7 +49,7 @@ public class TPJAVA3 extends Application {
 
         TabPane tabs = new TabPane();
         tabs.getTabs().add(new Dessin());
-        tabs.getTabs().add(new Calcul());
+        tabs.getTabs().add(new Quizz("Calcul"));
         tabs.getTabs().add(new Question());
 
         root.setTop(menubar);
