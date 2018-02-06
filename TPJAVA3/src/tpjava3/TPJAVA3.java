@@ -62,7 +62,6 @@ public class TPJAVA3 extends Application {
         root.setTop(menubar);
         root.setCenter(tabs);
         
-
         primaryStage.setTitle("Jeux d'Enfants");
 
         connexion.setOnAction(event -> {

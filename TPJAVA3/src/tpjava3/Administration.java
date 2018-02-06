@@ -11,9 +11,11 @@ import javafx.scene.control.Tab;
  *
  * @author stag
  */
-public class Administration extends Tab{
+public class Administration extends Tab {
 
     public Administration() {
+        this.setText("Administration");
+
     }
-    
+
 }
