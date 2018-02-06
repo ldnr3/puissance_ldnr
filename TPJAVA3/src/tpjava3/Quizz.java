@@ -1,6 +1,7 @@
 
 package tpjava3;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 
@@ -27,7 +29,7 @@ public class Quizz extends Tab {
         // **** Composant Graphique : Question
         
         Label qLabel = new Label("Question : ");
-        this.enonce = new Text("La question s'affichera dans cette zone de texte.");
+        this.enonce = new Text("Enoncé");
         HBox qhb = new HBox();
         qhb.getChildren().addAll(qLabel,this.enonce);
         qhb.setSpacing(20);
@@ -40,6 +42,9 @@ public class Quizz extends Tab {
         rhb.getChildren().addAll(rLabel,this.reponseUsr);
         rhb.setSpacing(20);
         
+        VBox vb = new VBox();
+        vb.getChildren().addAll(qhb,rhb);
+        vb.setSpacing(50);
         
         
         // *** Bouton Solution
@@ -48,12 +53,13 @@ public class Quizz extends Tab {
         this.verifier = new Button("Verifier");
         this.autreQuestion = new Button("Autre Question");
         HBox ctrlhb = new HBox();
-        ctrlhb.setSpacing(100);
+        ctrlhb.setSpacing(20);
+        ctrlhb.setAlignment(Pos.CENTER);
         ctrlhb.getChildren().addAll(this.solution, this.verifier, this.autreQuestion);
            
         BorderPane bp = new BorderPane();
-            bp.setTop(qhb);
-            bp.setCenter(rhb);
+            
+            bp.setCenter(vb);
             bp.setBottom(ctrlhb);
         
         this.setContent(bp);
