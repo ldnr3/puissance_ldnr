@@ -31,7 +31,7 @@ import javafx.scene.shape.Shape;
 public class Dessin extends Tab {
 
     private Color couleur;
-    private Shape forme;
+    private String forme;
 
     Dessin() {
 
@@ -95,26 +95,27 @@ public class Dessin extends Tab {
 
         });
 
-        /*formeG.selectedToggleProperty().addListener(new ChangeListener() {
+        formeG.selectedToggleProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
 
                 if (newValue.equals(carre)) {
-                    couleur = Color.RED;
-                    System.out.println("rouge");
-                } else if (newValue.equals(vert)) {
-                    couleur = Color.GREEN;
+                    forme = "carre";
                 } else {
-                    couleur = Color.BLUE;
+                    forme = "rond";
                 }
             }
 
-        });*/
+        });
         //======= Canvas =======\\
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, (MouseEvent t) -> {
             gc.setFill(couleur);
-            gc.fillRect(t.getX(), t.getY(), 5, 5);
+            if (forme.equals("carre")) {
+                gc.fillRect(t.getX(), t.getY(), 5, 5);
+            } else {
+                gc.fillOval(t.getX(), t.getY(), 5, 5);
+            }
 
         });
 
