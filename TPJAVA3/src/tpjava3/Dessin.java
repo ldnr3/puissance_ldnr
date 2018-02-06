@@ -5,6 +5,8 @@
  */
 package tpjava3;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.canvas.Canvas;
@@ -20,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 /**
  *
@@ -27,12 +30,16 @@ import javafx.scene.shape.Rectangle;
  */
 public class Dessin extends Tab {
 
+    private Color couleur;
+    private Shape forme;
+
     Dessin() {
 
         BorderPane tabDessin = new BorderPane();
         // Création d'un canevas pour avoir une zone de dessin
         final Canvas canvas = new Canvas(500, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+
         // Création d'une ToolBar pour ajouter les outils couleur, forme et effacer
         ToolBar outils = new ToolBar();
         outils.setOrientation(Orientation.VERTICAL);
@@ -43,10 +50,10 @@ public class Dessin extends Tab {
         RadioButton rouge = new RadioButton("Rouge");
         RadioButton vert = new RadioButton("Vert");
         RadioButton bleu = new RadioButton("Bleu");
-        ToggleGroup couleurs = new ToggleGroup();
-        rouge.setToggleGroup(couleurs);
-        vert.setToggleGroup(couleurs);
-        bleu.setToggleGroup(couleurs);
+        ToggleGroup couleurG = new ToggleGroup();
+        rouge.setToggleGroup(couleurG);
+        vert.setToggleGroup(couleurG);
+        bleu.setToggleGroup(couleurG);
         outils.getItems().addAll(rouge, vert, bleu);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
@@ -55,19 +62,62 @@ public class Dessin extends Tab {
         // Création des RadioButton
         RadioButton carre = new RadioButton("Carré");
         RadioButton rond = new RadioButton("Rond");
-        ToggleGroup forme = new ToggleGroup();
-        carre.setToggleGroup(forme);
-        rond.setToggleGroup(forme);
+        ToggleGroup formeG = new ToggleGroup();
+        carre.setToggleGroup(formeG);
+        rond.setToggleGroup(formeG);
         outils.getItems().addAll(carre, rond);
         //=== Fin de la partie Forme de la ToolBar
+
         Button effacer = new Button("Effacer");
         outils.getItems().add(effacer);
 
+        /**
+         * Effacement du contenu du canevas
+         */
+        effacer.setOnMouseClicked(e -> {
+            gc.clearRect(0, 0, 500, 300);
+        });
+
+        couleurG.selectedToggleProperty().addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                if (newValue.equals(rouge)) {
+                    couleur = Color.RED;
+                    System.out.println("rouge");
+                } else if (newValue.equals(vert)) {
+                    couleur = Color.GREEN;
+                } else {
+                    couleur = Color.BLUE;
+                }
+            }
+
+        });
+
+        /*formeG.selectedToggleProperty().addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+
+                if (newValue.equals(carre)) {
+                    couleur = Color.RED;
+                    System.out.println("rouge");
+                } else if (newValue.equals(vert)) {
+                    couleur = Color.GREEN;
+                } else {
+                    couleur = Color.BLUE;
+                }
+            }
+
+        });*/
+        //======= Canvas =======\\
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, (MouseEvent t) -> {
-            gc.setFill(Color.BLACK);
+            gc.setFill(couleur);
             gc.fillRect(t.getX(), t.getY(), 5, 5);
 
         });
+
         //Rectangle rect = new Rectangle(100, 100);
         tabDessin.setLeft(outils);
         tabDessin.setCenter(canvas);
