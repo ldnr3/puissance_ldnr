@@ -33,6 +33,7 @@ public class Quizz extends Tab {
         HBox qhb = new HBox();
         qhb.getChildren().addAll(qLabel,this.enonce);
         qhb.setSpacing(20);
+        qhb.setAlignment(Pos.CENTER);
         
         // *** Composant Graphique : Reponse
         
@@ -41,11 +42,7 @@ public class Quizz extends Tab {
         HBox rhb = new HBox();
         rhb.getChildren().addAll(rLabel,this.reponseUsr);
         rhb.setSpacing(20);
-        
-        VBox vb = new VBox();
-        vb.getChildren().addAll(qhb,rhb);
-        vb.setSpacing(50);
-        
+        rhb.setAlignment(Pos.CENTER);
         
         // *** Bouton Solution
         
@@ -56,11 +53,16 @@ public class Quizz extends Tab {
         ctrlhb.setSpacing(20);
         ctrlhb.setAlignment(Pos.CENTER);
         ctrlhb.getChildren().addAll(this.solution, this.verifier, this.autreQuestion);
+        
+        VBox vb = new VBox();
+        vb.getChildren().addAll(qhb,rhb,ctrlhb);
+        vb.setSpacing(50);
+        vb.setAlignment(Pos.CENTER);
            
         BorderPane bp = new BorderPane();
             
             bp.setCenter(vb);
-            bp.setBottom(ctrlhb);
+     
         
         this.setContent(bp);
         
