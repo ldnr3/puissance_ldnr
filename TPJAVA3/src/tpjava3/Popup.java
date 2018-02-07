@@ -39,4 +39,13 @@ public class Popup extends Parent {
         alert.setContentText("Enregistrement effectué !");
         alert.showAndWait();
     }
+    
+     public void alertInfo() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez saisir tous les champs !");
+        alert.showAndWait();
+    }
+    
 }

@@ -126,10 +126,15 @@ public class Administration extends Tab {
             QuestionBDD quest = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
             Popup pop = new Popup();
-            pop.alertSauv();
-            chNiveau1.setSelected(true);
-            this.chQuestion.clear();
-            this.chReponse.clear();
+            if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
+                pop.alertSauv();
+                chNiveau1.setSelected(true);
+                this.chQuestion.clear();
+                this.chReponse.clear();
+            } else {
+                pop.alertInfo();
+                chNiveau1.setSelected(true);
+            }
 
         });
 

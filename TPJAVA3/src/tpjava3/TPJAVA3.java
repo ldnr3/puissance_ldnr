@@ -5,6 +5,7 @@
  */
 package tpjava3;
 
+import java.awt.Color;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -12,6 +13,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import static javafx.scene.paint.Color.GREY;
 import javafx.stage.Stage;
 
 /**
@@ -28,7 +30,7 @@ public class TPJAVA3 extends Application {
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 800, 400);
-
+       
         // Création de la Menubar
         MenuBar menubar = new MenuBar();
         // Creation des menus de la barre
