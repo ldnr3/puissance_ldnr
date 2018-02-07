@@ -10,12 +10,12 @@ package beans;
  * @author stag
  */
 public class QuestionBDD {
-    private long id;
+    private Long id;
     private String enonce;
     private String reponse;
     private int niveau;
     
-    public QuestionBDD(long id, String enonce, String reponse, int niveau) {
+    public QuestionBDD(Long id, String enonce, String reponse, int niveau) {
         this.id = id;
         this.enonce = enonce;
         this.reponse = reponse;

@@ -5,6 +5,11 @@
  */
 package tpjava3;
 
+import DAO.DAO;
+import DAO.DAOFactory;
+import beans.QuestionBDD;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -14,15 +19,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-/**
- *
- * @author stag
- */
 public class Administration extends Tab {
 
     private final TextField chReponse;
@@ -30,8 +32,9 @@ public class Administration extends Tab {
     private final RadioButton chNiveau1;
     private final RadioButton chNiveau2;
     private final ComboBox chNum;
-    private Button btnEnregistrer;
-    private Button btnModifier;
+    private final Button btnEnregistrer;
+    private final Button btnModifier;
+    private int valNiv;
 
     public Administration() {
         this.setText("Administration");
@@ -62,6 +65,22 @@ public class Administration extends Tab {
         nhb.setSpacing(5);
         nhb.setAlignment(Pos.CENTER);
 
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle t, Toggle t1) {
+
+                RadioButton niv = (RadioButton) t1.getToggleGroup().getSelectedToggle();
+                if (niv.getText().equals("Niveau 1")) {
+                    valNiv = 1;
+                } else {
+                    valNiv = 2;
+
+                }
+                //   System.out.println("Selected Radio Button - " + niv.getText());
+
+            }
+        });
+
         // champs de saisie question/reponse
         Label qLabel = new Label("Question : ");
         this.chQuestion = new TextField("");
@@ -79,6 +98,7 @@ public class Administration extends Tab {
         rhb.setSpacing(5);
         rhb.setAlignment(Pos.CENTER);
 
+        // boutons
         this.btnEnregistrer = new Button("Enregister");
         this.btnModifier = new Button("Modifier");
         HBox bhb = new HBox();
@@ -96,6 +116,15 @@ public class Administration extends Tab {
         bp.setCenter(vb);
 
         this.setContent(bp);
+
+        // TRAITEMENT BOUTONS
+        btnEnregistrer.setOnAction(event -> {
+            DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
+            QuestionBDD quest = questiondao.create(
+                    new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
+            System.out.println("question créé : " + quest);
+
+        });
 
     }
 

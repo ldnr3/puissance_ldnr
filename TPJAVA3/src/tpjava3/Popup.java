@@ -11,7 +11,9 @@ public class Popup extends Parent {
     }
 
     public boolean verifLogin(String s) {
+
         return true;
+
     }
 
     public void login() {
