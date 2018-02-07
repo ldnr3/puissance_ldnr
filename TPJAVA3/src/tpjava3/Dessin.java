@@ -83,24 +83,6 @@ public class Dessin extends Tab {
             gc.clearRect(0, 0, 500, 300);
         });
 
-        /*couleurG.selectedToggleProperty().addListener(new ChangeListener() {
-
-            @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-
-                if (newValue.equals(rouge)) {
-                    couleur = Color.RED;
-                    System.out.println("rouge");
-                } else if (newValue.equals(vert)) {
-                    couleur = Color.GREEN;
-                } else {
-                    couleur = Color.BLUE;
-                }
-            }
-
-        });*/
-        
-
         formeG.selectedToggleProperty().addListener(new ChangeListener() {
 
             @Override
