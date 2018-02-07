@@ -76,7 +76,6 @@ public class Administration extends Tab {
                     valNiv = 2;
 
                 }
-                //   System.out.println("Selected Radio Button - " + niv.getText());
 
             }
         });
@@ -122,7 +121,8 @@ public class Administration extends Tab {
             DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
             QuestionBDD quest = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
-            System.out.println("question créé : " + quest);
+          Popup pop = new Popup();
+          pop.alertSauv();
 
         });
 
