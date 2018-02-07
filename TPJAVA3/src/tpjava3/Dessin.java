@@ -5,14 +5,15 @@
  */
 package tpjava3;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -26,7 +27,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-
 /**
  *
  * @author stag
@@ -34,14 +34,13 @@ import javafx.scene.shape.Shape;
 public class Dessin extends Tab {
 
     private Color couleur;
-    private String forme;
+    private String forme = "carre";
 
     Dessin() {
 
-
         BorderPane tabDessin = new BorderPane();
         // Création d'un canevas pour avoir une zone de dessin
-        final Canvas canvas = new Canvas(500, 300);
+        final Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         // Création d'une ToolBar pour ajouter les outils couleur, forme et effacer
@@ -50,15 +49,16 @@ public class Dessin extends Tab {
         //=== Début de la partie couleur de la ToolBar
         Label couleurLab = new Label("Couleur");
         outils.getItems().add(couleurLab);
-        // Création des RadioButton
-        RadioButton rouge = new RadioButton("Rouge");
-        RadioButton vert = new RadioButton("Vert");
-        RadioButton bleu = new RadioButton("Bleu");
-        ToggleGroup couleurG = new ToggleGroup();
-        rouge.setToggleGroup(couleurG);
-        vert.setToggleGroup(couleurG);
-        bleu.setToggleGroup(couleurG);
-        outils.getItems().addAll(rouge, vert, bleu);
+        // Création de la sélection des couleurs
+        final ColorPicker colorPicker = new ColorPicker();
+        colorPicker.setOnAction(new EventHandler() {
+            public void handle(Event t) {
+                couleur = colorPicker.getValue();
+            }
+        });
+        
+        colorPicker.getStyleClass().add("button");
+        outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
         Label formeLab = new Label("Forme");
@@ -67,6 +67,7 @@ public class Dessin extends Tab {
         RadioButton carre = new RadioButton("Carré");
         RadioButton rond = new RadioButton("Rond");
         ToggleGroup formeG = new ToggleGroup();
+        carre.setSelected(true);
         carre.setToggleGroup(formeG);
         rond.setToggleGroup(formeG);
         outils.getItems().addAll(carre, rond);
@@ -82,7 +83,7 @@ public class Dessin extends Tab {
             gc.clearRect(0, 0, 500, 300);
         });
 
-        couleurG.selectedToggleProperty().addListener(new ChangeListener() {
+        /*couleurG.selectedToggleProperty().addListener(new ChangeListener() {
 
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -97,7 +98,8 @@ public class Dessin extends Tab {
                 }
             }
 
-        });
+        });*/
+        
 
         formeG.selectedToggleProperty().addListener(new ChangeListener() {
 
