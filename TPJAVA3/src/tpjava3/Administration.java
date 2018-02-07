@@ -49,9 +49,13 @@ public class Administration extends Tab {
                 );
         this.chNum = new ComboBox(numQuestion);
         chNum.getSelectionModel().select(0);
+        Label nlabel = new Label("Si modification");
+        nlabel.setTranslateX(23);
+        nlabel.setTranslateY(5);
+
         HBox numHb = new HBox();
-        numHb.getChildren().addAll(this.chNum);
-        numHb.setAlignment(Pos.CENTER);
+        numHb.getChildren().addAll(this.chNum, nlabel);
+        this.chNum.setTranslateX(20);
 
         // RadioButton des niveaux
         final ToggleGroup group = new ToggleGroup();
@@ -106,7 +110,7 @@ public class Administration extends Tab {
         bhb.setAlignment(Pos.CENTER);
 
         VBox vb = new VBox();
-        vb.getChildren().addAll(numHb, chNum, nhb, qhb, rhb, bhb);
+        vb.getChildren().addAll(numHb, nhb, qhb, rhb, bhb);
         vb.setSpacing(25);
         vb.setAlignment(Pos.CENTER);
 
@@ -121,8 +125,11 @@ public class Administration extends Tab {
             DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
             QuestionBDD quest = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
-          Popup pop = new Popup();
-          pop.alertSauv();
+            Popup pop = new Popup();
+            pop.alertSauv();
+            chNiveau1.setSelected(true);
+            this.chQuestion.clear();
+            this.chReponse.clear();
 
         });
 
