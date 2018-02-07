@@ -33,9 +33,16 @@ public class Calcul extends QGenerator {
             default :
                 operande1 = this.getRandomInteger(10);  // Entier  0..9
                 operande2 = this.getRandomInteger(10);  // Entier  0..9
+                
                 switch(this.getRandomInteger(2)) {
+                    
                     case 1 :
-                        operateur = ArithmeticOperation.SUB;
+                        operateur = ArithmeticOperation.SUB;        // Soustraction
+                        
+                        while(operande1 < operande2) {
+                            operande2 = this.getRandomInteger(10);  // resultat > 0 pour niveau 1
+                        }
+                        
                         break;
                     default :
                         operateur = ArithmeticOperation.ADD;
