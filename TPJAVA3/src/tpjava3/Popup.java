@@ -2,6 +2,8 @@ package tpjava3;
 
 import java.util.Optional;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 
 public class Popup extends Parent {
@@ -28,5 +30,13 @@ public class Popup extends Parent {
             verifLogin(login.get());
         }
 
+    }
+
+    public void alertSauv() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Enregistrement effectué !");
+        alert.showAndWait();
     }
 }
