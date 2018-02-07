@@ -21,6 +21,8 @@ public class Calcul extends QGenerator {
                 switch(this.getRandomInteger(3)) {
                     case 2 :
                         operateur = ArithmeticOperation.MUL;
+                        operande1 = this.getRandomInteger(10);  // Entier 0..9
+                        operande2 = this.getRandomInteger(10);  // Entier 0..9
                         break;
                     case 1 :
                         operateur = ArithmeticOperation.SUB;
@@ -30,6 +32,7 @@ public class Calcul extends QGenerator {
                 }
                 break;
                 
+            case 1  :   
             default :
                 operande1 = this.getRandomInteger(10);  // Entier  0..9
                 operande2 = this.getRandomInteger(10);  // Entier  0..9
