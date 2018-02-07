@@ -64,7 +64,7 @@ public class Dessin extends Tab {
         Label formeLab = new Label("Forme");
         formeLab.setTranslateY(10);
         outils.getItems().add(formeLab);
-        // Création des RadioButton
+        // Création des RadioButton pour le choix de la forme du pinceau
         RadioButton carre = new RadioButton("Carré");
         RadioButton rond = new RadioButton("Rond");
         ToggleGroup formeG = new ToggleGroup();
@@ -87,7 +87,7 @@ public class Dessin extends Tab {
         effacer.setOnMouseClicked(e -> {
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         });
-
+        // Sélection de la forme du pinceau
         formeG.selectedToggleProperty().addListener(new ChangeListener() {
 
             @Override
