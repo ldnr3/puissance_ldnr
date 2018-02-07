@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import static javafx.scene.paint.Color.GREY;
@@ -30,7 +32,7 @@ public class TPJAVA3 extends Application {
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 800, 400);
-       
+
         // Création de la Menubar
         MenuBar menubar = new MenuBar();
         // Creation des menus de la barre
@@ -56,10 +58,59 @@ public class TPJAVA3 extends Application {
         menubar.getMenus().addAll(activite, niveau, admin);
 
         TabPane tabs = new TabPane();
-        tabs.getTabs().add(new Dessin());
-        tabs.getTabs().add(new Quizz("Calcul"));
-        tabs.getTabs().add(new Question());
-
+        Dessin tabDessin = new Dessin();
+        Quizz tabCalcul = new Quizz("Calcul");
+        Question tabQuestion = new Question();
+        tabs.getTabs().add(tabDessin);
+        tabs.getTabs().add(tabCalcul);
+        tabs.getTabs().add(tabQuestion);
+        
+        // Gestion de la fermeture des onglets
+        // L'onglet est désactivé lorsqu'il est fermé
+        tabDessin.setOnClosed(e->{
+            tabDessin.setDisable(true);
+        });
+        tabCalcul.setOnClosed(e->{
+            tabCalcul.setDisable(true);
+        });
+        tabQuestion.setOnClosed(e->{
+            tabQuestion.setDisable(true);
+        });
+        // Appel des différents onglets quand cliqué dans le menu
+        dessin.setOnAction(e -> {
+            // Si l'onglet est désactivé, on le réactive et on l'ouvre
+            if (tabDessin.isDisable()) {
+                tabDessin.setDisable(false);
+                tabs.getTabs().add(tabDessin);
+            }
+            // L'onglet est sélectionné
+            SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
+            selectionModel.select(tabDessin);
+              
+        });
+        calcul.setOnAction(e -> {
+            // Si l'onglet est désactivé, on le réactive et on l'ouvre
+            if (tabCalcul.isDisable()) {
+                tabCalcul.setDisable(false);
+                tabs.getTabs().add(tabCalcul);
+            }
+            // L'onglet est sélectionné
+            SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
+            selectionModel.select(tabCalcul);
+              
+        });
+        question.setOnAction(e -> {
+            // Si l'onglet est désactivé, on le réactive et on l'ouvre
+            if (tabQuestion.isDisable()) {
+                tabQuestion.setDisable(false);
+                tabs.getTabs().add(tabQuestion);
+            }
+            // L'onglet est sélectionné
+            SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
+            selectionModel.select(tabQuestion);
+              
+        });
+        // Appel de la fenetre popup pour la connexion
         connexion.setOnAction(event -> {
             pop = new Popup();
             pop.login();
