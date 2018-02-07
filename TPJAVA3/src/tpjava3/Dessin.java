@@ -33,7 +33,7 @@ import javafx.scene.shape.Shape;
  */
 public class Dessin extends Tab {
 
-    private Color couleur;
+    private Color couleur = Color.BLACK;
     private String forme = "carre";
 
     Dessin() {
@@ -56,12 +56,13 @@ public class Dessin extends Tab {
                 couleur = colorPicker.getValue();
             }
         });
-        
+        colorPicker.setValue(couleur);
         colorPicker.getStyleClass().add("button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
         Label formeLab = new Label("Forme");
+        formeLab.setTranslateY(10);
         outils.getItems().add(formeLab);
         // Création des RadioButton
         RadioButton carre = new RadioButton("Carré");
@@ -70,17 +71,21 @@ public class Dessin extends Tab {
         carre.setSelected(true);
         carre.setToggleGroup(formeG);
         rond.setToggleGroup(formeG);
+        carre.setTranslateY(6);
+        rond.setTranslateY(7);
+        
         outils.getItems().addAll(carre, rond);
         //=== Fin de la partie Forme de la ToolBar
 
         Button effacer = new Button("Effacer");
+        effacer.setTranslateY(15);
         outils.getItems().add(effacer);
 
         /**
          * Effacement du contenu du canevas
          */
         effacer.setOnMouseClicked(e -> {
-            gc.clearRect(0, 0, 500, 300);
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         });
 
         formeG.selectedToggleProperty().addListener(new ChangeListener() {
