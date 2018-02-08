@@ -133,11 +133,11 @@ public class TPJAVA3 extends Application {
         // Appel de la fenetre popup pour la connexion
         connexion.setOnAction(event -> {
             pop = new Popup();
-            pop.login();
+      /*      pop.login();
             String s = null;
             if (pop.verifLogin(s) == true) {
                 tabs.getTabs().add(new Administration());
-            }
+            } */
         });
 
         root.setTop(menubar);
