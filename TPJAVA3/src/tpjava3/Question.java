@@ -1,14 +1,23 @@
 package tpjava3;
 
-import javafx.scene.control.Tab;
-
-/**
- *
- * @author stag
- */
-public class Question extends Tab {
+public class Question extends QGenerator {
 
     Question() {
-        this.setText("Question");
+        
+    }
+
+    @Override
+    public String getQuestion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getReponse() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void newQuestion(int niveau) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

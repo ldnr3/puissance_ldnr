@@ -21,13 +21,18 @@ public class Quizz extends Tab {
     private Button solution;        // Bouton pour demander l'affichage de la solution
     private Button verifier;        // Bouton pour demander la vérification de la réponse donnée
     private Button autreQuestion;   // Bouton pour demander la génération d'une nouvelle question
+    
+    private Boolean[] ctrlBttnVisibility;  // Definit la visibilité des boutons de contrôle
+    private String[] ctrlBttnLabel;        // Label des boutons
    
     private QGenerator qgen;          // Generateur de questions
-    
-    public Quizz(String title) {
+   
+    public Quizz(String title,QGenerator qg, String[] label,Boolean[] visibility) {
         super(title);
         
-        this.qgen = new Calcul(1);   // Test -- Générateur de questions arithmetique de niveau 1
+        this.qgen = qg;   // Test -- Générateur de questions arithmetique de niveau 1
+        this.ctrlBttnLabel = label;
+        this.ctrlBttnVisibility = visibility;
         
         // **** Composant Graphique : Question
         
@@ -59,17 +64,28 @@ public class Quizz extends Tab {
         
         // *** Bouton Solution
         
-        this.solution = new Button("Solution");
+        this.solution = new Button(ctrlBttnLabel[0]);
         this.solution.setOnAction(
             (ActionEvent e) -> {
-                System.out.println("Solution demandée");    // debug               
+                System.out.println("Solution demandée");    // debug
+                
+                if (this.reponseUsr.getText().equals(this.qgen.getReponse())) {
+                    System.out.println("OK");
+                    this.reponseUsr.setStyle("-fx-background-color: GREEN;");
+                }
+                else
+                {
+                    System.out.println("KO");
+                    this.reponseUsr.setStyle("-fx-background-color: RED;");
+                }
+                
                 shb.setVisible(true);
             }
         );
         
         // *** Bouton Verifier
         
-        this.verifier = new Button("Verifier");
+        this.verifier = new Button(ctrlBttnLabel[1]);
         this.verifier.setOnAction(
             (ActionEvent e) -> {
                 System.out.println("Verification demandée");    // debug
@@ -90,7 +106,7 @@ public class Quizz extends Tab {
         
         // *** Bouton Autre
         
-        this.autreQuestion = new Button("Autre Question");
+        this.autreQuestion = new Button(ctrlBttnLabel[2]);
         this.autreQuestion.setOnAction(
             (ActionEvent e) -> {
                 
@@ -107,6 +123,11 @@ public class Quizz extends Tab {
                 System.out.println(this.qgen.getQuestion());
             }
         );
+        
+        // **** Visibilite des boutons de contrôle
+        this.solution.setVisible(ctrlBttnVisibility[0]);
+        this.verifier.setVisible(ctrlBttnVisibility[1]);
+        this.autreQuestion.setVisible(ctrlBttnVisibility[2]);
         
         HBox ctrlhb = new HBox();
         ctrlhb.setSpacing(20);
