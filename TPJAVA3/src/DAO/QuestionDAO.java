@@ -122,7 +122,6 @@ public class QuestionDAO extends DAO<QuestionBDD> {
     public QuestionBDD getObj(int n) {
         QuestionBDD question = null;
         int nombre = 1;
-        Long id2 = 0L;
         ResultSet res;
 
         try {
