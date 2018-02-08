@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// AUTEUR : Rached, groupe 3
 package tpjava3;
 
 import DAO.DAO;
@@ -51,11 +47,12 @@ public class Administration extends Tab {
         chNum.getSelectionModel().select(0);
         Label nlabel = new Label("Si modification");
         nlabel.setTranslateX(23);
-        nlabel.setTranslateY(5);
+        nlabel.setTranslateY(0);
 
         HBox numHb = new HBox();
         numHb.getChildren().addAll(this.chNum, nlabel);
         this.chNum.setTranslateX(20);
+        numHb.setAlignment(Pos.CENTER);
 
         // RadioButton des niveaux
         final ToggleGroup group = new ToggleGroup();
@@ -120,11 +117,33 @@ public class Administration extends Tab {
 
         this.setContent(bp);
 
-        // TRAITEMENT BOUTONS
+        // TRAITEMENT BOUTON ENREGISTRER
         btnEnregistrer.setOnAction(event -> {
             DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
             QuestionBDD quest = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
+            Popup pop = new Popup();
+            if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
+                pop.alertSauv();
+                chNiveau1.setSelected(true);
+                this.chQuestion.clear();
+                this.chReponse.clear();
+            } else {
+                pop.alertInfo();
+                chNiveau1.setSelected(true);
+            }
+
+        });
+
+        // TRAITEMENT BOUTON MODIFIER
+        btnModifier.setOnAction(event -> {
+            DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
+            QuestionBDD quest = new QuestionBDD();
+            quest = questiondao.find(8L);
+            quest.setEnonce(this.chQuestion.getText());
+            quest.setReponse(this.chReponse.getText());
+            quest.setNiveau(valNiv);
+            quest = questiondao.update(quest);
             Popup pop = new Popup();
             if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
                 pop.alertSauv();
