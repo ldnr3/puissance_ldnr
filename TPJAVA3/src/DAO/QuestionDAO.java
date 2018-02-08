@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Auteurs : Frédéric et Rached
 package DAO;
 
 import beans.QuestionBDD;
@@ -18,9 +14,9 @@ import java.util.logging.Logger;
  * @author stag
  */
 public class QuestionDAO extends DAO<QuestionBDD> {
-    
-    private  final String TABLE = "question";
-    
+
+    private final String TABLE = "question";
+
     @Override
     public QuestionBDD find(Long id) {
         QuestionBDD question = null;
@@ -46,8 +42,8 @@ public class QuestionDAO extends DAO<QuestionBDD> {
 
     @Override
     public QuestionBDD create(QuestionBDD obj) {
-         try {
-            String req = "INSERT INTO " + TABLE + " (enonce, reponse, niveau) VALUES(?, ?, ?)";
+        try {
+            String req = "INSERT INTO " + TABLE + " (enonce, reponse, niveau) VALUES(?,?, ?, ?)";
 //            System.out.println("requête : " + req); // Debug
             PreparedStatement pstmt = this.connection.prepareStatement(
                     req, Statement.RETURN_GENERATED_KEYS);
@@ -80,7 +76,7 @@ public class QuestionDAO extends DAO<QuestionBDD> {
             PreparedStatement pstmt = this.connection.prepareStatement(req);
             pstmt.setString(1, obj.getEnonce());
             pstmt.setString(2, obj.getReponse());
-            pstmt.setInt(3,obj.getNiveau());
+            pstmt.setInt(3, obj.getNiveau());
             pstmt.setLong(4, obj.getId());
             pstmt.executeUpdate();
             // On récupère l'enregistrement modifié
@@ -103,7 +99,7 @@ public class QuestionDAO extends DAO<QuestionBDD> {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public int compter() {
         int nombre = 0;
@@ -121,5 +117,5 @@ public class QuestionDAO extends DAO<QuestionBDD> {
         }
         return nombre;
     }
-    
+
 }
