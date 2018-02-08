@@ -104,4 +104,22 @@ public class QuestionDAO extends DAO<QuestionBDD> {
         }
     }
     
+    @Override
+    public int compter() {
+        int nombre = 0;
+        ResultSet res;
+
+        try {
+            String req = "SELECT * FROM " + TABLE;
+            PreparedStatement pstmt = this.connection.prepareStatement(req);
+            res = pstmt.executeQuery(req);
+            while (res.next()) {
+                nombre++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nombre;
+    }
+    
 }
