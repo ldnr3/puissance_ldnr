@@ -1,3 +1,6 @@
+
+// AUTEUR : Rached, groupe 3
+
 package tpjava3;
 
 import java.util.Optional;
@@ -13,8 +16,8 @@ public class Popup extends Parent {
     }
 
     public boolean verifLogin(String s) {
-
-        return true;
+       //   return (s.equals("toto")) ;
+         return true;
 
     }
 

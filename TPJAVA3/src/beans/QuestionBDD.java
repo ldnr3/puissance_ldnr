@@ -8,13 +8,18 @@ package beans;
 /**
  *
  * @author stag
+ *
  */
 public class QuestionBDD {
+
     private Long id;
     private String enonce;
     private String reponse;
     private int niveau;
-    
+
+    public QuestionBDD() {
+    }
+
     public QuestionBDD(Long id, String enonce, String reponse, int niveau) {
         this.id = id;
         this.enonce = enonce;
@@ -53,10 +58,10 @@ public class QuestionBDD {
     public void setNiveau(int niveau) {
         this.niveau = niveau;
     }
-    
+
     @Override
     public String toString() {
-        return "Question { id = " + this.id + ", enonce = " + this.enonce +
-                ", reponse = " + this.reponse + ", niveau = " + this.niveau +"}";
+        return "Question { id = " + this.id + ", enonce = " + this.enonce
+                + ", reponse = " + this.reponse + ", niveau = " + this.niveau + "}";
     }
 }
