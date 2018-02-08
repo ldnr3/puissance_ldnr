@@ -21,6 +21,8 @@ import javafx.scene.control.Tab;
 
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -46,7 +48,7 @@ public class Dessin extends Tab {
         BorderPane tabDessin = new BorderPane();
         tabDessin.setBackground(new Background(new BackgroundFill(Color.DIMGRAY,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-        
+
         // StackPane pour contenir le canevas (illusion de Background)
         StackPane conteneur = new StackPane();
         conteneur.setBackground(new Background(new BackgroundFill(Color.WHITE,
@@ -63,7 +65,7 @@ public class Dessin extends Tab {
         Label couleurLab = new Label("Couleur");
         couleurLab.setTranslateX(55);
         outils.getItems().add(couleurLab);
-        
+
         // Création de la sélection des couleurs
         final ColorPicker colorPicker = new ColorPicker();
         colorPicker.setOnAction(new EventHandler() {
@@ -71,13 +73,13 @@ public class Dessin extends Tab {
                 couleur = colorPicker.getValue();
             }
         });
-        
+
         colorPicker.setValue(couleur);
         colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
-        Label formeLab = new Label("Forme");
+        Label formeLab = new Label("Pinceau");
         formeLab.setTranslateX(55);
         formeLab.setTranslateY(10);
         outils.getItems().add(formeLab);
@@ -85,8 +87,24 @@ public class Dessin extends Tab {
         RadioButton carre = new RadioButton("Carré");
         RadioButton rond = new RadioButton("Rond");
         ToggleGroup formeG = new ToggleGroup();
+        
+        // ==== Image du choix carre ==== \\
+        ImageView carreImageView = new ImageView();
+        Image carreImage = new Image(Dessin.class.getResourceAsStream("/images/carre.png"));
+        carreImageView.setImage(carreImage);
+        carreImageView.setPreserveRatio(true);
+             
+        carre.setGraphic(carreImageView);
         carre.setSelected(true);
         carre.setToggleGroup(formeG);
+        
+        // ==== Image du choix rond ==== \\
+        ImageView rondImageView = new ImageView();
+        Image rondImage = new Image(Dessin.class.getResourceAsStream("/images/rond.png"));
+        rondImageView.setImage(rondImage);
+        rondImageView.setPreserveRatio(true);
+        
+        rond.setGraphic(rondImageView);
         rond.setToggleGroup(formeG);
         carre.setTranslateY(8);
         rond.setTranslateY(10);
