@@ -11,18 +11,18 @@ public class MySQLConnection {
     /**
      * URL de connection
      */
-    private static final String HOST = "localhost";
+    private static final String HOST = "172.16.0.48";
     private static final String PORT = "3306";
     private static final String DATABASE = "question";  // BDD locale Rached = "question"
     private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
     /**
      * Nom du user
      */
-    private static final String USER = "root";
+    private static final String USER = "dsig3";
     /**
      * Mot de passe du user
      */
-    private static final String PASSWORD = "1234512345";
+    private static final String PASSWORD = "dsig3";
     /**
      * Objet Connection
      */
