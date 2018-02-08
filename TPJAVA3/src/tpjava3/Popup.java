@@ -1,6 +1,4 @@
-
 // AUTEUR : Rached, groupe 3
-
 package tpjava3;
 
 import java.util.Optional;
@@ -16,8 +14,8 @@ public class Popup extends Parent {
     }
 
     public boolean verifLogin(String s) {
-       //   return (s.equals("toto")) ;
-         return true;
+        //   return (s.equals("toto")) ;
+        return true;
 
     }
 
@@ -42,13 +40,21 @@ public class Popup extends Parent {
         alert.setContentText("Enregistrement effectué !");
         alert.showAndWait();
     }
-    
-     public void alertInfo() {
+
+    public void alerModif() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Modification effectuée !");
+        alert.showAndWait();
+    }
+
+    public void alertInfo() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez saisir tous les champs !");
         alert.showAndWait();
     }
-    
+
 }

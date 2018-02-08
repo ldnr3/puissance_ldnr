@@ -121,8 +121,7 @@ public class QuestionDAO extends DAO<QuestionBDD> {
     @Override
     public QuestionBDD getObj(int n) {
         QuestionBDD question = null;
-        int nombre = 1;
-        Long id2 = 0L;
+        int nombre = 0;
         ResultSet res;
 
         try {
@@ -130,6 +129,8 @@ public class QuestionDAO extends DAO<QuestionBDD> {
             PreparedStatement pstmt = this.connection.prepareStatement(req);
             res = pstmt.executeQuery(req);
             while (res.next()) {
+                nombre++;
+
                 if (n == nombre) {
                     question = new QuestionBDD(
                             res.getLong("id"),
@@ -139,7 +140,6 @@ public class QuestionDAO extends DAO<QuestionBDD> {
                     );
                     break;
                 }
-                nombre++;
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);

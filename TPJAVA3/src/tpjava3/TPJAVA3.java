@@ -5,7 +5,6 @@
  */
 package tpjava3;
 
-import java.awt.Color;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
@@ -15,7 +14,6 @@ import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import static javafx.scene.paint.Color.GREY;
 import javafx.stage.Stage;
 
 /**

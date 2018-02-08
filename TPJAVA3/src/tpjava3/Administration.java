@@ -147,7 +147,7 @@ public class Administration extends Tab {
             quest3 = questiondao.update(quest3);
             Popup pop = new Popup();
             if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
-                pop.alertSauv();
+                pop.alerModif();
                 chNiveau1.setSelected(true);
                 this.chQuestion.clear();
                 this.chReponse.clear();
@@ -161,6 +161,10 @@ public class Administration extends Tab {
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
             QuestionBDD quest4 = new QuestionBDD();
+            quest4 = questiondao.getObj(chNum.getSelectionModel().getSelectedIndex()+1);
+         //   chNum.getSelectionModel().select(0);
+            this.chQuestion.setText(quest4.getEnonce());
+            this.chReponse.setText(quest4.getReponse());
 
             //  quest4 = questiondao.find(n);
         });
