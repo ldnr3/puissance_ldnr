@@ -1,1 +1,5 @@
 MotDePasse=DSI
+host=127.0.0.1
+database=question
+user=root
+dbpassword=1234512345
