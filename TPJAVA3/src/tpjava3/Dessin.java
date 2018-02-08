@@ -78,7 +78,8 @@ public class Dessin extends Tab {
         colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
-        //=== Début de la partie Forme de la ToolBar
+        
+        //=== Début de la partie Pinceau de la ToolBar
         Label formeLab = new Label("Pinceau");
         formeLab.setTranslateX(55);
         formeLab.setTranslateY(10);
@@ -110,11 +111,13 @@ public class Dessin extends Tab {
         rond.setTranslateY(10);
 
         outils.getItems().addAll(carre, rond);
-        //=== Fin de la partie Forme de la ToolBar
+
+        //=== Fin de la partie Pinceau de la ToolBar
 
         Button effacer = new Button("Effacer");
         effacer.setTranslateX(55);
         effacer.setTranslateY(20);
+
         outils.getItems().add(effacer);
 
         /**
