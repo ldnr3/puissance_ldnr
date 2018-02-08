@@ -45,14 +45,14 @@ public class TPJAVA3 extends Application {
         MenuItem question = new MenuItem("Question-Réponse");
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
-        
+
         ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
         RadioMenuItem niv1 = new RadioMenuItem("Niveau 1");
         niv1.setToggleGroup(groupNiveau);
         RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
         niv2.setToggleGroup(groupNiveau);
-       
+
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
@@ -68,32 +68,32 @@ public class TPJAVA3 extends Application {
         tabs.setTabMinHeight(30);
         // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
-        
+
         // *** Onglet Calcul
-        String[] tcLabel = {"Solution","","Autre Calcul"};
-        Boolean[] tcVisibility = {true,false,true};
+        String[] tcLabel = {"Solution", "", "Autre Calcul"};
+        Boolean[] tcVisibility = {true, false, true};
         Calcul cgen = new Calcul(1);
-        Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
-        
+        Quizz tabCalcul = new Quizz("Calcul", cgen, tcLabel, tcVisibility);
+
         // *** Onglet Question
-        String[] tqLabel = {"Solution","Vérifier","Autre Question"};
-        Boolean[] tqVisibility = {true,true,true};
+        String[] tqLabel = {"Solution", "Vérifier", "Autre Question"};
+        Boolean[] tqVisibility = {true, true, true};
         Question qgen = new Question(1);
-        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
-        
+        Quizz tabQuestion = new Quizz("Question", qgen, tqLabel, tqVisibility);
+
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
         tabs.getTabs().add(tabQuestion);
-        
+
         // Gestion de la fermeture des onglets
         // L'onglet est désactivé lorsqu'il est fermé
-        tabDessin.setOnClosed(e->{
+        tabDessin.setOnClosed(e -> {
             tabDessin.setDisable(true);
         });
-        tabCalcul.setOnClosed(e->{
+        tabCalcul.setOnClosed(e -> {
             tabCalcul.setDisable(true);
         });
-        tabQuestion.setOnClosed(e->{
+        tabQuestion.setOnClosed(e -> {
             tabQuestion.setDisable(true);
         });
         // Appel des différents onglets quand cliqué dans le menu
@@ -106,7 +106,7 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabDessin);
-              
+
         });
         calcul.setOnAction(e -> {
             // Si l'onglet est désactivé, on le réactive et on l'ouvre
@@ -117,7 +117,7 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabCalcul);
-              
+
         });
         question.setOnAction(e -> {
             // Si l'onglet est désactivé, on le réactive et on l'ouvre
@@ -128,16 +128,14 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabQuestion);
-              
+
         });
         // Appel de la fenetre popup pour la connexion
         connexion.setOnAction(event -> {
             pop = new Popup();
-      /*      pop.login();
-            String s = null;
-            if (pop.verifLogin(s) == true) {
+            if (pop.login() == true) {
                 tabs.getTabs().add(new Administration());
-            } */
+            }
         });
 
         root.setTop(menubar);

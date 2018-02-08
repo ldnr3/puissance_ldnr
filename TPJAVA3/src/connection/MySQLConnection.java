@@ -10,19 +10,20 @@ public class MySQLConnection {
 
     /**
      * URL de connection
+     
      */
-    private static final String HOST = "172.16.0.48";
+    private static final String HOST = "127.0.0.1";
     private static final String PORT = "3306";
-    private static final String DATABASE = "dsig3";  // BDD Rached = "question"
+    private static final String DATABASE = "question";  // BDD Rached = "question"
     private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
     /**
      * Nom du user
      */
-    private static final String USER = "dsig3";
+    private static final String USER = "root";
     /**
      * Mot de passe du user
      */
-    private static final String PASSWORD = "dsig3";
+    private static final String PASSWORD = "1234512345";
     /**
      * Objet Connection
      */
