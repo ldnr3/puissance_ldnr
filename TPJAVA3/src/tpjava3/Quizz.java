@@ -154,19 +154,15 @@ public class Quizz extends Tab {
     private String normalizeString(String src) {
         
         String dst = src.toLowerCase();
-         
-        // *** accent {é,è,ê} -> e
-        dst = dst.replace('é','e');
-        dst = dst.replace('è','e');
-        dst = dst.replace('ê','e');
-        
+              
         // *** {à,â} -> a
         dst = dst.replace('à','a');
         dst = dst.replace('â','a');
         
-        // *** {ù,û} -> u
-        dst = dst.replace('ù','u');
-        dst = dst.replace('û','u');
+        // *** {é,è,ê} -> e
+        dst = dst.replace('é','e');
+        dst = dst.replace('è','e');
+        dst = dst.replace('ê','e');
         
         // *** î -> i
         dst = dst.replace('î', 'i');
@@ -174,6 +170,13 @@ public class Quizz extends Tab {
         // *** ô -> o
         dst = dst.replace('ô','o');
         
+        // *** {ù,û} -> u
+        dst = dst.replace('ù','u');
+        dst = dst.replace('û','u');
+        
+        // *** ç -> c
+        dst = dst.replace('ç', 'c');
+                
         return dst;
     }
 }
