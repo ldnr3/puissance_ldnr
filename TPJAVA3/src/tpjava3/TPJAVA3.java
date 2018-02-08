@@ -58,6 +58,10 @@ public class TPJAVA3 extends Application {
         menubar.getMenus().addAll(activite, niveau, admin);
 
         TabPane tabs = new TabPane();
+        // Personnalisation de la taille des onglets
+        tabs.setTabMinWidth(125);
+        tabs.setTabMinHeight(30);
+        // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
         
         // *** Onglet Calcul

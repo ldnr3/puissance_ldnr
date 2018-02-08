@@ -9,6 +9,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,7 +22,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -39,7 +44,15 @@ public class Dessin extends Tab {
     Dessin() {
 
         BorderPane tabDessin = new BorderPane();
-        // Création d'un canevas pour avoir une zone de dessin
+        tabDessin.setBackground(new Background(new BackgroundFill(Color.DIMGRAY,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        
+        // StackPane pour contenir le canevas (illusion de Background)
+        StackPane conteneur = new StackPane();
+        conteneur.setBackground(new Background(new BackgroundFill(Color.WHITE,
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        conteneur.setMaxSize(600, 300);
+        // Création d'un canevas pour avoir une zone de dessin       
         final Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -57,7 +70,7 @@ public class Dessin extends Tab {
             }
         });
         colorPicker.setValue(couleur);
-        colorPicker.getStyleClass().add("button");
+        colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
@@ -73,7 +86,7 @@ public class Dessin extends Tab {
         rond.setToggleGroup(formeG);
         carre.setTranslateY(6);
         rond.setTranslateY(7);
-        
+
         outils.getItems().addAll(carre, rond);
         //=== Fin de la partie Forme de la ToolBar
 
@@ -113,8 +126,9 @@ public class Dessin extends Tab {
         });
 
         //Rectangle rect = new Rectangle(100, 100);
+        conteneur.getChildren().add(canvas);
         tabDessin.setLeft(outils);
-        tabDessin.setCenter(canvas);
+        tabDessin.setCenter(conteneur);
         this.setContent(tabDessin);
         this.setText("Dessin");
     }
