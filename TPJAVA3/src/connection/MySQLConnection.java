@@ -13,7 +13,7 @@ public class MySQLConnection {
      */
     private static final String HOST = "172.16.0.48";
     private static final String PORT = "3306";
-    private static final String DATABASE = "question";  // BDD locale Rached = "question"
+    private static final String DATABASE = "dsig3";  // BDD Rached = "question"
     private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
     /**
      * Nom du user
