@@ -6,6 +6,7 @@
 package tpjava3;
 
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -14,6 +15,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -25,10 +27,11 @@ import javafx.stage.Stage;
 public class TPJAVA3 extends Application {
 
     private Popup pop;
+    private int niv = 2; // *** Niveau par defaut
 
     @Override
     public void start(Stage primaryStage) {
-
+        
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 800, 400);
@@ -49,10 +52,20 @@ public class TPJAVA3 extends Application {
         ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
         RadioMenuItem niv1 = new RadioMenuItem("Niveau 1");
+        niv1.setUserData(1);
         niv1.setToggleGroup(groupNiveau);
         RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
+        niv2.setUserData(2);
         niv2.setToggleGroup(groupNiveau);
        
+        groupNiveau.selectedToggleProperty().addListener(
+         (ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
+        Toggle new_toggle) -> {
+        if (groupNiveau.getSelectedToggle() != null) {
+             niv = (int)groupNiveau.getSelectedToggle().getUserData();
+             System.out.println("Niveau sélectionné : " + niv);  // debug
+         }
+        });
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
@@ -72,13 +85,13 @@ public class TPJAVA3 extends Application {
         // *** Onglet Calcul
         String[] tcLabel = {"Solution","","Autre Calcul"};
         Boolean[] tcVisibility = {true,false,true};
-        Calcul cgen = new Calcul(1);
+        Calcul cgen = new Calcul(niv);
         Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
         
         // *** Onglet Question
         String[] tqLabel = {"Solution","Vérifier","Autre Question"};
         Boolean[] tqVisibility = {true,true,true};
-        Question qgen = new Question(1);
+        Question qgen = new Question(niv);
         Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
         
         tabs.getTabs().add(tabDessin);
