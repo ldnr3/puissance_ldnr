@@ -33,6 +33,8 @@ public class Administration extends Tab {
     private int valNiv;
 
     public Administration() {
+        DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
+
         this.setText("Administration");
 
         //selection n° question
@@ -43,6 +45,12 @@ public class Administration extends Tab {
                         "2",
                         "3"
                 );
+
+        QuestionBDD quest1 = new QuestionBDD();
+        for (long i = 1; i <= questiondao.compter(); i++) {
+
+        }
+
         this.chNum = new ComboBox(numQuestion);
         chNum.getSelectionModel().select(0);
         Label nlabel = new Label("Si modification");
@@ -119,8 +127,7 @@ public class Administration extends Tab {
 
         // TRAITEMENT BOUTON ENREGISTRER
         btnEnregistrer.setOnAction(event -> {
-            DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
-            QuestionBDD quest = questiondao.create(
+            QuestionBDD quest2 = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
             Popup pop = new Popup();
             if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
@@ -137,13 +144,12 @@ public class Administration extends Tab {
 
         // TRAITEMENT BOUTON MODIFIER
         btnModifier.setOnAction(event -> {
-            DAO<QuestionBDD> questiondao = DAOFactory.getQuestionDAO();
-            QuestionBDD quest = new QuestionBDD();
-            quest = questiondao.find(8L);
-            quest.setEnonce(this.chQuestion.getText());
-            quest.setReponse(this.chReponse.getText());
-            quest.setNiveau(valNiv);
-            quest = questiondao.update(quest);
+            QuestionBDD quest3 = new QuestionBDD();
+            quest3 = questiondao.find(8L);
+            quest3.setEnonce(this.chQuestion.getText());
+            quest3.setReponse(this.chReponse.getText());
+            quest3.setNiveau(valNiv);
+            quest3 = questiondao.update(quest3);
             Popup pop = new Popup();
             if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
                 pop.alertSauv();
@@ -153,6 +159,15 @@ public class Administration extends Tab {
             } else {
                 pop.alertInfo();
                 chNiveau1.setSelected(true);
+            }
+
+        });
+
+        // TRAITEMENT SELECTION N° QUESTION
+        chNum.setOnAction(event -> {
+            QuestionBDD quest4 = new QuestionBDD();
+            for (long i = 1; i <= questiondao.compter(); i++) {
+                //  quest = questiondao.find(i);
             }
 
         });
