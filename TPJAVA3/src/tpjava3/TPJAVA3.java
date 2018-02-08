@@ -58,6 +58,8 @@ public class TPJAVA3 extends Application {
         menubar.getMenus().addAll(activite, niveau, admin);
 
         TabPane tabs = new TabPane();
+        tabs.setTabMinWidth(125);
+        tabs.setTabMinHeight(30);
         Dessin tabDessin = new Dessin();
         Quizz tabCalcul = new Quizz("Calcul");
         Question tabQuestion = new Question();
