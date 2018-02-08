@@ -28,15 +28,13 @@ public class Popup extends Parent {
             Properties mdpProp = new Properties();
             mdpProp.load(in);
 
-         //   mdpValue = mdpProp.getProperty(key);
-           // System.out.println(key + " = " + mdpProp.getProperty(key));
-System.out.println("test");
+            mdpValue = mdpProp.getProperty(key);
+            System.out.println(key + " = " + mdpProp.getProperty(key));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //  System.out.println("s : " + s);
 
         return true;
 
@@ -50,7 +48,6 @@ System.out.println("test");
 
         Optional<String> login = dialog.showAndWait();
         if (login.isPresent()) {
-            //     System.out.println("Mot de passe : " + login.get());
             verifLogin(login.get());
         }
 
