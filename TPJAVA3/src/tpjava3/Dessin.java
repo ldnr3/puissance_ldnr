@@ -5,8 +5,15 @@
  */
 package tpjava3;
 
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,6 +30,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -33,6 +41,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -78,7 +88,8 @@ public class Dessin extends Tab {
         colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
-        //=== Début de la partie Forme de la ToolBar
+        
+        //=== Début de la partie Pinceau de la ToolBar
         Label formeLab = new Label("Pinceau");
         formeLab.setTranslateX(55);
         formeLab.setTranslateY(10);
@@ -110,11 +121,40 @@ public class Dessin extends Tab {
         rond.setTranslateY(10);
 
         outils.getItems().addAll(carre, rond);
-        //=== Fin de la partie Forme de la ToolBar
+
+        //=== Fin de la partie Pinceau de la ToolBar
+        
+        Button enregistrement = new Button("Enregistrer");
+        enregistrement.setTranslateX(55);
+        enregistrement.setTranslateY(50);
+        enregistrement.setOnAction((ActionEvent t) -> {
+            FileChooser fileChooser = new FileChooser();
+            
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter =
+                    new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+            fileChooser.getExtensionFilters().add(extFilter);
+            
+            //Show save file dialog
+            File file;
+            file = fileChooser.showSaveDialog(new javafx.stage.Popup());
+            
+            if(file != null){
+                try {
+                    WritableImage writableImage = new WritableImage(600, 300);
+                    canvas.snapshot(null, writableImage);
+                    RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+                    ImageIO.write(renderedImage, "png", file);
+                } catch (IOException ex) {
+                    Logger.getLogger(Dessin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         Button effacer = new Button("Effacer");
         effacer.setTranslateX(55);
-        effacer.setTranslateY(20);
+        effacer.setTranslateY(50);
+        outils.getItems().add(enregistrement);
         outils.getItems().add(effacer);
 
         /**

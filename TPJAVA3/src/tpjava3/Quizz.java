@@ -67,15 +67,16 @@ public class Quizz extends Tab {
         this.solution = new Button(ctrlBttnLabel[0]);
         this.solution.setOnAction(
             (ActionEvent e) -> {
-                System.out.println("Solution demandée");    // debug
                 
-                if (this.reponseUsr.getText().equals(this.qgen.getReponse())) {
-                    System.out.println("OK");
+                // *** Normalisation des chaines de caracteres
+                String rusr = normalizeString(this.reponseUsr.getText());
+                String rgen = normalizeString(this.qgen.getReponse());
+                
+                if (rusr.equals(rgen)) {
                     this.reponseUsr.setStyle("-fx-background-color: GREEN;");
                 }
                 else
                 {
-                    System.out.println("KO");
                     this.reponseUsr.setStyle("-fx-background-color: RED;");
                 }
                 
@@ -88,15 +89,17 @@ public class Quizz extends Tab {
         this.verifier = new Button(ctrlBttnLabel[1]);
         this.verifier.setOnAction(
             (ActionEvent e) -> {
-                System.out.println("Verification demandée");    // debug
+ 
+              // *** Normalisation des chaines de caracteres
+
+                String rusr = normalizeString(this.reponseUsr.getText());
+                String rgen = normalizeString(this.qgen.getReponse());
                 
-                if (this.reponseUsr.getText().equals(this.qgen.getReponse())) {
-                    System.out.println("OK");
+                if (rusr.equals(rgen)) {
                     this.reponseUsr.setStyle("-fx-background-color: GREEN;");
                 }
                 else
                 {
-                    System.out.println("KO");
                     this.reponseUsr.setStyle("-fx-background-color: RED;");
                 }
                 
@@ -146,5 +149,34 @@ public class Quizz extends Tab {
         
         this.setContent(bp);
         
+    }
+    
+    private String normalizeString(String src) {
+        
+        String dst = src.toLowerCase();
+              
+        // *** {à,â} -> a
+        dst = dst.replace('à','a');
+        dst = dst.replace('â','a');
+        
+        // *** {é,è,ê} -> e
+        dst = dst.replace('é','e');
+        dst = dst.replace('è','e');
+        dst = dst.replace('ê','e');
+        
+        // *** î -> i
+        dst = dst.replace('î', 'i');
+        
+        // *** ô -> o
+        dst = dst.replace('ô','o');
+        
+        // *** {ù,û} -> u
+        dst = dst.replace('ù','u');
+        dst = dst.replace('û','u');
+        
+        // *** ç -> c
+        dst = dst.replace('ç', 'c');
+                
+        return dst;
     }
 }
