@@ -61,7 +61,9 @@ public class Dessin extends Tab {
         outils.setOrientation(Orientation.VERTICAL);
         //=== Début de la partie couleur de la ToolBar
         Label couleurLab = new Label("Couleur");
+        couleurLab.setTranslateX(55);
         outils.getItems().add(couleurLab);
+        
         // Création de la sélection des couleurs
         final ColorPicker colorPicker = new ColorPicker();
         colorPicker.setOnAction(new EventHandler() {
@@ -69,12 +71,14 @@ public class Dessin extends Tab {
                 couleur = colorPicker.getValue();
             }
         });
+        
         colorPicker.setValue(couleur);
         colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
         Label formeLab = new Label("Forme");
+        formeLab.setTranslateX(55);
         formeLab.setTranslateY(10);
         outils.getItems().add(formeLab);
         // Création des RadioButton pour le choix de la forme du pinceau
@@ -84,14 +88,15 @@ public class Dessin extends Tab {
         carre.setSelected(true);
         carre.setToggleGroup(formeG);
         rond.setToggleGroup(formeG);
-        carre.setTranslateY(6);
-        rond.setTranslateY(7);
+        carre.setTranslateY(8);
+        rond.setTranslateY(10);
 
         outils.getItems().addAll(carre, rond);
         //=== Fin de la partie Forme de la ToolBar
 
         Button effacer = new Button("Effacer");
-        effacer.setTranslateY(15);
+        effacer.setTranslateX(55);
+        effacer.setTranslateY(20);
         outils.getItems().add(effacer);
 
         /**
