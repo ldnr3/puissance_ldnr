@@ -19,38 +19,30 @@ public class Popup extends Parent {
 
     }
 
-    public boolean verifLogin(String s) {
-
+    public boolean login(String s) {
         String mdpValue = null;
         String key = "MotDePasse";
-
-        try (FileReader in = new FileReader("TP3PropertiesIn")) {
-            Properties mdpProp = new Properties();
-            mdpProp.load(in);
-
-            mdpValue = mdpProp.getProperty(key);
-            System.out.println(key + " = " + mdpProp.getProperty(key));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return true;
-
-    }
-
-    public void login() {
-
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Authentification");
         dialog.setContentText("Mot de passe :");
 
         Optional<String> login = dialog.showAndWait();
         if (login.isPresent()) {
-            verifLogin(login.get());
-        }
 
+            try (FileReader in = new FileReader("TP3PropertiesIn")) {
+                Properties mdpProp = new Properties();
+                mdpProp.load(in);
+
+                mdpValue = mdpProp.getProperty(key);
+                System.out.println(key + " = " + mdpProp.getProperty(key));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return (s.equals(mdpValue));
     }
 
     public void alertSauv() {
