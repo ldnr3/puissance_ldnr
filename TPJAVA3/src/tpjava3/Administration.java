@@ -161,7 +161,8 @@ public class Administration extends Tab {
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
             QuestionBDD quest4 = new QuestionBDD();
-            quest4 = questiondao.getObj(chNum.getSelectionModel());
+            quest4 = questiondao.getObj(chNum.getSelectionModel().getSelectedIndex()+1);
+         //   chNum.getSelectionModel().select(0);
             this.chQuestion.setText(quest4.getEnonce());
             this.chReponse.setText(quest4.getReponse());
 
