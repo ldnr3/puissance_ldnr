@@ -1,7 +1,13 @@
 // AUTEUR : Rached, groupe 3
 package tpjava3;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -14,7 +20,24 @@ public class Popup extends Parent {
     }
 
     public boolean verifLogin(String s) {
-        //   return (s.equals("toto")) ;
+
+        String mdpValue = null;
+        String key = "MotDePasse";
+
+        try (FileReader in = new FileReader("TP3PropertiesIn")) {
+            Properties mdpProp = new Properties();
+            mdpProp.load(in);
+
+         //   mdpValue = mdpProp.getProperty(key);
+           // System.out.println(key + " = " + mdpProp.getProperty(key));
+System.out.println("test");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //  System.out.println("s : " + s);
+
         return true;
 
     }
@@ -27,7 +50,7 @@ public class Popup extends Parent {
 
         Optional<String> login = dialog.showAndWait();
         if (login.isPresent()) {
-            //  System.out.println("Mot de passe : " + login.get());
+            //     System.out.println("Mot de passe : " + login.get());
             verifLogin(login.get());
         }
 
