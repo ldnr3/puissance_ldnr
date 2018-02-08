@@ -43,7 +43,7 @@ public class QuestionDAO extends DAO<QuestionBDD> {
     @Override
     public QuestionBDD create(QuestionBDD obj) {
         try {
-            String req = "INSERT INTO " + TABLE + " (enonce, reponse, niveau) VALUES(?,?, ?, ?)";
+            String req = "INSERT INTO " + TABLE + " (enonce, reponse, niveau) VALUES(?,?, ?)";
 //            System.out.println("requête : " + req); // Debug
             PreparedStatement pstmt = this.connection.prepareStatement(
                     req, Statement.RETURN_GENERATED_KEYS);

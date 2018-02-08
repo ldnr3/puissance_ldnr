@@ -38,16 +38,17 @@ public class Administration extends Tab {
         this.setText("Administration");
 
         //Initialiser liste de selection n° question
-        ObservableList<Long> numQuestion
+        ObservableList<String> numQuestion
                 = FXCollections.observableArrayList();
+        numQuestion.add("Question n°");
 
         QuestionBDD quest1 = new QuestionBDD();
-        for (long i = 1; i <= questiondao.compter(); i++) {
-            numQuestion.add(i);
+        for (int i = 1; i <= questiondao.compter(); i++) {
+            numQuestion.add(Integer.toString(i));
         }
 
         this.chNum = new ComboBox(numQuestion);
-        chNum.getSelectionModel().select(0);
+        chNum.getSelectionModel().selectFirst();
         Label nlabel = new Label("Si modification");
         nlabel.setTranslateX(23);
         nlabel.setTranslateY(0);
@@ -140,7 +141,9 @@ public class Administration extends Tab {
         // TRAITEMENT BOUTON MODIFIER
         btnModifier.setOnAction(event -> {
             QuestionBDD quest3 = new QuestionBDD();
-            quest3 = questiondao.find(8L);
+            int numero = chNum.getSelectionModel().getSelectedIndex();
+            quest3 = questiondao.getObj(numero);
+            quest3 = questiondao.find(quest3.getId());
             quest3.setEnonce(this.chQuestion.getText());
             quest3.setReponse(this.chReponse.getText());
             quest3.setNiveau(valNiv);
@@ -148,11 +151,13 @@ public class Administration extends Tab {
             Popup pop = new Popup();
             if ((!chQuestion.getText().equals("")) && (!chReponse.getText().equals(""))) {
                 pop.alerModif();
+                chNum.getSelectionModel().selectFirst();
                 chNiveau1.setSelected(true);
                 this.chQuestion.clear();
                 this.chReponse.clear();
             } else {
                 pop.alertInfo();
+                chNum.getSelectionModel().selectFirst();
                 chNiveau1.setSelected(true);
             }
 
@@ -161,12 +166,17 @@ public class Administration extends Tab {
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
             QuestionBDD quest4 = new QuestionBDD();
-            quest4 = questiondao.getObj(chNum.getSelectionModel().getSelectedIndex()+1);
-         //   chNum.getSelectionModel().select(0);
+            int numero = chNum.getSelectionModel().getSelectedIndex() + 1;
+            quest4 = questiondao.getObj(numero);
             this.chQuestion.setText(quest4.getEnonce());
             this.chReponse.setText(quest4.getReponse());
+            int niv = quest4.getNiveau();
+            if (niv == 1) {
+                chNiveau1.setSelected(true);
+            } else if (niv == 2) {
+                chNiveau2.setSelected(true);
+            }
 
-            //  quest4 = questiondao.find(n);
         });
 
     }
