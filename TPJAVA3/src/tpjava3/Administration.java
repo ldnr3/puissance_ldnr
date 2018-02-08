@@ -162,7 +162,7 @@ public class Administration extends Tab {
         chNum.setOnAction(event -> {
             QuestionBDD quest4 = new QuestionBDD();
 
-            //  quest4 = questiondao.find(i);
+            //  quest4 = questiondao.find(n);
         });
 
     }

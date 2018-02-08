@@ -16,5 +16,7 @@ public abstract class DAO<T> {
     public abstract void delete(T obj);
 
     public abstract int compter();
+    
+    public abstract T getObj(int n);
 
 }

@@ -118,4 +118,33 @@ public class QuestionDAO extends DAO<QuestionBDD> {
         return nombre;
     }
 
+    @Override
+    public QuestionBDD getObj(int n) {
+        QuestionBDD question = null;
+        int nombre = 1;
+        Long id2 = 0L;
+        ResultSet res;
+
+        try {
+            String req = "SELECT * FROM " + TABLE;
+            PreparedStatement pstmt = this.connection.prepareStatement(req);
+            res = pstmt.executeQuery(req);
+            while (res.next()) {
+                if (n == nombre) {
+                    question = new QuestionBDD(
+                            res.getLong("id"),
+                            res.getString("enonce"),
+                            res.getString("reponse"),
+                            res.getInt("niveau")
+                    );
+                    break;
+                }
+                nombre++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return question;
+    }
+
 }
