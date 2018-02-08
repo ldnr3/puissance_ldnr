@@ -111,23 +111,13 @@ public class Dessin extends Tab {
         rond.setTranslateY(10);
 
         outils.getItems().addAll(carre, rond);
-        
-        Button enregistrer = new Button("Enregistrer");
-        enregistrer.setOnMouseClicked(e -> {
-            gc.save();
-        });
-        
-        Button charger = new Button("Charger");
-        charger.setOnMouseClicked(e -> {
-            gc.restore();
-        });
-        
-        
+
         //=== Fin de la partie Pinceau de la ToolBar
 
         Button effacer = new Button("Effacer");
         effacer.setTranslateX(55);
         effacer.setTranslateY(20);
+
         outils.getItems().add(effacer);
 
         /**
