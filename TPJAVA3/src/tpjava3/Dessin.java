@@ -57,7 +57,7 @@ public class Dessin extends Tab {
             }
         });
         colorPicker.setValue(couleur);
-        colorPicker.getStyleClass().add("button");
+        colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
         //=== Fin de la partie couleur de la ToolBar
         //=== Début de la partie Forme de la ToolBar
