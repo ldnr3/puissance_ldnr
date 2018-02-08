@@ -53,7 +53,7 @@ public class ArithmeticOperation {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.operande1);
-        sb.append(this.operateur);
+        sb.append(" ").append(this.operateur).append(" ");
         sb.append(this.operande2);
         return sb.toString();
     }

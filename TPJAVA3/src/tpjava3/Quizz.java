@@ -9,7 +9,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -122,8 +121,8 @@ public class Quizz extends Tab {
                 sol.setText(this.qgen.getReponse());
                 shb.setVisible(false);
                 
-                System.out.println("Nouveau Calcul");   // Debug
-                System.out.println(this.qgen.getQuestion());
+//                System.out.println("Nouveau Calcul");   // Debug
+//                System.out.println(this.qgen.getQuestion());
             }
         );
         
