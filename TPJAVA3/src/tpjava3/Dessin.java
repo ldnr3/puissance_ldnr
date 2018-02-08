@@ -150,7 +150,8 @@ public class Dessin extends Tab {
         enregistrement.setOnAction((ActionEvent t) -> {
             FileChooser fileChooser = new FileChooser();
 
-            //Set extension filter
+            // On filtre les extention pour n'afficher que les fichiers .png
+            // et enregistrer le fichier en .png
             FileChooser.ExtensionFilter extFilter
                     = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
             fileChooser.getExtensionFilters().add(extFilter);
@@ -163,6 +164,8 @@ public class Dessin extends Tab {
                 try {
                     WritableImage writableImage = new WritableImage(600, 300);
                     canvas.snapshot(null, writableImage);
+                    // Conversion d'une imageFX vers Swing pour se servir de
+                    // l'interface RenderedImage
                     RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                     ImageIO.write(renderedImage, "png", file);
                 } catch (IOException ex) {
