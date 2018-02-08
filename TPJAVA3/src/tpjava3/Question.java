@@ -1,23 +1,42 @@
 package tpjava3;
 
-public class Question extends QGenerator {
+import DAO.DAO;
+import DAO.DAOFactory;
+import DAO.QuestionDAO;
+import beans.QuestionBDD;
 
-    Question() {
+public class Question extends QGenerator {
+    
+    private QuestionBDD currentQuestion;
+    private DAO<QuestionBDD> myQuestionDAO;
+
+    Question(int niveau) {
         
+        this.myQuestionDAO = DAOFactory.getQuestionDAO(); 
+        this.newQuestion(niveau);
     }
 
     @Override
     public String getQuestion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.currentQuestion.getEnonce();
     }
 
     @Override
     public String getReponse() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.currentQuestion.getReponse();
     }
 
     @Override
     public void newQuestion(int niveau) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        int nRecord = this.myQuestionDAO.compter();               // *** Nombre d'enregistrement de la BDD
+        QuestionBDD q;
+        
+        do {
+            int numLigne = 1 + this.getRandomInteger(nRecord);    // *** Numero de la ligne dans la table 1..nRecord
+            q = this.myQuestionDAO.getObj(numLigne);
+        } while(q.getNiveau() != niveau);
+        
+        this.currentQuestion = q;       
     }
 }

@@ -37,18 +37,13 @@ public class Administration extends Tab {
 
         this.setText("Administration");
 
-        //selection n° question
-        ObservableList<String> numQuestion
-                = FXCollections.observableArrayList(
-                        "Question n°",
-                        "1",
-                        "2",
-                        "3"
-                );
+        //Initialiser liste de selection n° question
+        ObservableList<Long> numQuestion
+                = FXCollections.observableArrayList();
 
         QuestionBDD quest1 = new QuestionBDD();
         for (long i = 1; i <= questiondao.compter(); i++) {
-
+            numQuestion.add(i);
         }
 
         this.chNum = new ComboBox(numQuestion);
@@ -166,10 +161,8 @@ public class Administration extends Tab {
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
             QuestionBDD quest4 = new QuestionBDD();
-            for (long i = 1; i <= questiondao.compter(); i++) {
-                //  quest = questiondao.find(i);
-            }
 
+            //  quest4 = questiondao.find(n);
         });
 
     }

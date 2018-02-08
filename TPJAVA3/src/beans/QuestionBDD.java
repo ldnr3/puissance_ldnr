@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Auteurs : Frédéric et Rached
+
 package beans;
 
-/**
- *
- * @author stag
- *
- */
 public class QuestionBDD {
 
     private Long id;
@@ -20,7 +12,7 @@ public class QuestionBDD {
     public QuestionBDD() {
     }
 
-    public QuestionBDD(Long id, String enonce, String reponse, int niveau) {
+    public QuestionBDD(Long id,String enonce, String reponse, int niveau) {
         this.id = id;
         this.enonce = enonce;
         this.reponse = reponse;
@@ -30,7 +22,8 @@ public class QuestionBDD {
     public long getId() {
         return id;
     }
-
+    
+    
     public String getEnonce() {
         return enonce;
     }
@@ -46,7 +39,8 @@ public class QuestionBDD {
     public void setId(long id) {
         this.id = id;
     }
-
+    
+   
     public void setEnonce(String enonce) {
         this.enonce = enonce;
     }

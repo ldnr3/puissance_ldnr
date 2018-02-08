@@ -73,8 +73,8 @@ public class TPJAVA3 extends Application {
         // *** Onglet Question
         String[] tqLabel = {"Solution","Vérifier","Autre Question"};
         Boolean[] tqVisibility = {true,true,true};
-        
-        Quizz tabQuestion = new Quizz("Question",cgen,tqLabel,tqVisibility);
+        Question qgen = new Question(1);
+        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
         
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
