@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -43,9 +45,14 @@ public class TPJAVA3 extends Application {
         MenuItem question = new MenuItem("Question-Réponse");
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
+        
+        ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
-        MenuItem niv1 = new MenuItem("Niveau 1");
-        MenuItem niv2 = new MenuItem("Niveau 2");
+        RadioMenuItem niv1 = new RadioMenuItem("Niveau 1");
+        niv1.setToggleGroup(groupNiveau);
+        RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
+        niv2.setToggleGroup(groupNiveau);
+       
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
