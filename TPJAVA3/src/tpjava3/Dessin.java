@@ -61,7 +61,9 @@ public class Dessin extends Tab {
         outils.setOrientation(Orientation.VERTICAL);
         //=== Début de la partie couleur de la ToolBar
         Label couleurLab = new Label("Couleur");
+        couleurLab.setTranslateX(outils.getWidth());
         outils.getItems().add(couleurLab);
+        
         // Création de la sélection des couleurs
         final ColorPicker colorPicker = new ColorPicker();
         colorPicker.setOnAction(new EventHandler() {
@@ -69,6 +71,7 @@ public class Dessin extends Tab {
                 couleur = colorPicker.getValue();
             }
         });
+        
         colorPicker.setValue(couleur);
         colorPicker.getStyleClass().add("split-button");
         outils.getItems().add(colorPicker);
