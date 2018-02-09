@@ -112,7 +112,7 @@ public class Quizz extends Tab {
         this.autreQuestion.setOnAction(
             (ActionEvent e) -> {
                 
-                this.qgen.newQuestion(1);  // Debug provisoire : Niveau = 1
+                this.qgen.newQuestion();  // Debug provisoire : Niveau = 1
                 
                 this.enonce.setText(this.qgen.getQuestion());
                 this.reponseUsr.clear();

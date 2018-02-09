@@ -13,7 +13,8 @@ public class Question extends QGenerator {
     Question(int niveau) {
         
         this.myQuestionDAO = DAOFactory.getQuestionDAO(); 
-        this.newQuestion(niveau);
+        this.setNiveau(niveau);
+        this.newQuestion();
     }
 
     @Override
@@ -27,7 +28,7 @@ public class Question extends QGenerator {
     }
 
     @Override
-    public void newQuestion(int niveau) {
+    public void newQuestion() {
         
         int nRecord = this.myQuestionDAO.compter();               // *** Nombre d'enregistrement de la BDD
         QuestionBDD q;
@@ -35,7 +36,7 @@ public class Question extends QGenerator {
         do {
             int numLigne = 1 + this.getRandomInteger(nRecord);    // *** Numero de la ligne dans la table 1..nRecord
             q = this.myQuestionDAO.getObj(numLigne);
-        } while(q.getNiveau() != niveau);
+        } while(q.getNiveau() != this.getNiveau());
         
         this.currentQuestion = q;       
     }

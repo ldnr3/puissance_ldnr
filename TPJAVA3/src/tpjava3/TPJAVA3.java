@@ -27,7 +27,6 @@ import javafx.stage.Stage;
 public class TPJAVA3 extends Application {
 
     private Popup pop;
-    private int niv = 2; // *** Niveau par defaut
 
     @Override
     public void start(Stage primaryStage) {
@@ -48,7 +47,19 @@ public class TPJAVA3 extends Application {
         MenuItem question = new MenuItem("Question-Réponse");
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
+
+        // *** Onglet Calcul
+        String[] tcLabel = {"Solution","","Autre Calcul"};
+        Boolean[] tcVisibility = {true,false,true};
+        Calcul cgen = new Calcul(1);        // Niveau 1 par defaut
+        final Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
         
+        // *** Onglet Question
+        String[] tqLabel = {"Solution","Vérifier","Autre Question"};
+        Boolean[] tqVisibility = {true,true,true};
+        Question qgen = new Question(1);    // Niveau 1 par defaut
+        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
+
         ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
         RadioMenuItem niv1 = new RadioMenuItem("Niveau 1");
@@ -62,10 +73,14 @@ public class TPJAVA3 extends Application {
          (ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
         Toggle new_toggle) -> {
         if (groupNiveau.getSelectedToggle() != null) {
-             niv = (int)groupNiveau.getSelectedToggle().getUserData();
-             System.out.println("Niveau sélectionné : " + niv);  // debug
+            int niv = (int)groupNiveau.getSelectedToggle().getUserData();
+//          System.out.println("Niveau sélectionné : " + niv);  // debug
+            
+            cgen.setNiveau(niv);
+            qgen.setNiveau(niv);           
          }
         });
+        
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
@@ -81,19 +96,7 @@ public class TPJAVA3 extends Application {
         tabs.setTabMinHeight(30);
         // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
-        
-        // *** Onglet Calcul
-        String[] tcLabel = {"Solution","","Autre Calcul"};
-        Boolean[] tcVisibility = {true,false,true};
-        Calcul cgen = new Calcul(niv);
-        Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
-        
-        // *** Onglet Question
-        String[] tqLabel = {"Solution","Vérifier","Autre Question"};
-        Boolean[] tqVisibility = {true,true,true};
-        Question qgen = new Question(niv);
-        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
-        
+                
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
         tabs.getTabs().add(tabQuestion);
