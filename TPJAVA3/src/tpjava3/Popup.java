@@ -44,7 +44,7 @@ public class Popup extends Parent {
         String mdpSaisie = login.get();
         if (!mdpSaisie.equals(mdpValue)) {
             this.alertMdp();
-            mdpSaisie=" ";
+            mdpSaisie = " ";
             this.login();
         }
         return true;
