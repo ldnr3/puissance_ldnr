@@ -6,6 +6,7 @@
 package tpjava3;
 
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -14,6 +15,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -28,7 +30,7 @@ public class TPJAVA3 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 800, 400);
@@ -46,13 +48,38 @@ public class TPJAVA3 extends Application {
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
 
+        // *** Onglet Calcul
+        String[] tcLabel = {"Solution","","Autre Calcul"};
+        Boolean[] tcVisibility = {true,false,true};
+        Calcul cgen = new Calcul(1);        // Niveau 1 par defaut
+        final Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
+        
+        // *** Onglet Question
+        String[] tqLabel = {"Solution","Vérifier","Autre Question"};
+        Boolean[] tqVisibility = {true,true,true};
+        Question qgen = new Question(1);    // Niveau 1 par defaut
+        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
+
         ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
         RadioMenuItem niv1 = new RadioMenuItem("Niveau 1");
+        niv1.setUserData(1);
         niv1.setToggleGroup(groupNiveau);
         RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
+        niv2.setUserData(2);
         niv2.setToggleGroup(groupNiveau);
-
+       
+        groupNiveau.selectedToggleProperty().addListener(
+         (ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
+        Toggle new_toggle) -> {
+        if (groupNiveau.getSelectedToggle() != null) {
+            int niv = (int)groupNiveau.getSelectedToggle().getUserData();
+//          System.out.println("Niveau sélectionné : " + niv);  // debug           
+            cgen.setNiveau(niv);
+            qgen.setNiveau(niv);           
+         }
+        });
+        
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
@@ -68,19 +95,7 @@ public class TPJAVA3 extends Application {
         tabs.setTabMinHeight(30);
         // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
-
-        // *** Onglet Calcul
-        String[] tcLabel = {"Solution", "", "Autre Calcul"};
-        Boolean[] tcVisibility = {true, false, true};
-        Calcul cgen = new Calcul(1);
-        Quizz tabCalcul = new Quizz("Calcul", cgen, tcLabel, tcVisibility);
-
-        // *** Onglet Question
-        String[] tqLabel = {"Solution", "Vérifier", "Autre Question"};
-        Boolean[] tqVisibility = {true, true, true};
-        Question qgen = new Question(1);
-        Quizz tabQuestion = new Quizz("Question", qgen, tqLabel, tqVisibility);
-
+                
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
         tabs.getTabs().add(tabQuestion);
