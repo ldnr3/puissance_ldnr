@@ -5,16 +5,17 @@ public class Calcul extends QGenerator {
     private ArithmeticOperation op;
 
     public Calcul(int niveau) {
-        this.newQuestion(niveau);
+        this.setNiveau(niveau);
+        this.newQuestion();
     }
 
     @Override
-    public void newQuestion(int niveau) {
+    public void newQuestion() {
         int operande1 = 0;
         int operande2 = 0;
         char operateur = ArithmeticOperation.ADD;
         
-        switch(niveau) {
+        switch(this.getNiveau()) {
             case 2 :
                 operande1 = this.getRandomInteger(1000);  // Entier  0..999
                 operande2 = this.getRandomInteger(1000);  // Entier  0..999
