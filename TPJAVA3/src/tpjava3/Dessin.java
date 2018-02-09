@@ -18,6 +18,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -152,11 +153,13 @@ public class Dessin extends Tab {
         // Souligne les texte du bouton quand la souris est dessus
         enregistrement.setOnMouseEntered(e -> {
             enregistrement.setUnderline(true);
+            enregistrement.setCursor(Cursor.HAND);
         });
         
         // Retire le soulignement quand la souris sort
         enregistrement.setOnMouseExited(e -> {
             enregistrement.setUnderline(false);
+            enregistrement.setCursor(Cursor.DEFAULT);
         });
 
         enregistrement.setOnAction((ActionEvent t) -> {
@@ -195,11 +198,13 @@ public class Dessin extends Tab {
         // Souligne les texte du bouton quand la souris est dessus
         effacer.setOnMouseEntered(e -> {
             effacer.setUnderline(true);
+            effacer.setCursor(Cursor.HAND);
         });
         
         // Retire le soulignement quand la souris sort
         effacer.setOnMouseExited(e -> {
             effacer.setUnderline(false);
+            effacer.setCursor(Cursor.DEFAULT);
         });
         
         outils.getItems().add(enregistrement);
