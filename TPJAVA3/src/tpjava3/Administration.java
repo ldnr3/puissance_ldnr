@@ -162,19 +162,21 @@ public class Administration extends Tab {
             }
 
         });
-
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
-            QuestionBDD quest4 = new QuestionBDD();
+
             int numero = chNum.getSelectionModel().getSelectedIndex();
-            quest4 = questiondao.getObj(numero);
-            this.chQuestion.setText(quest4.getEnonce());
-            this.chReponse.setText(quest4.getReponse());
-            int niv = quest4.getNiveau();
-            if (niv == 1) {
-                chNiveau1.setSelected(true);
-            } else if (niv == 2) {
-                chNiveau2.setSelected(true);
+            if (numero != 0)  {
+                QuestionBDD quest4 = new QuestionBDD();
+                quest4 = questiondao.getObj(numero);
+                this.chQuestion.setText(quest4.getEnonce());
+                this.chReponse.setText(quest4.getReponse());
+                int niv = quest4.getNiveau();
+                if (niv == 1) {
+                    chNiveau1.setSelected(true);
+                } else if (niv == 2) {
+                    chNiveau2.setSelected(true);
+                }
             }
 
         });

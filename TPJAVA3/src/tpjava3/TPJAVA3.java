@@ -74,8 +74,7 @@ public class TPJAVA3 extends Application {
         Toggle new_toggle) -> {
         if (groupNiveau.getSelectedToggle() != null) {
             int niv = (int)groupNiveau.getSelectedToggle().getUserData();
-//          System.out.println("Niveau sélectionné : " + niv);  // debug
-            
+//          System.out.println("Niveau sélectionné : " + niv);  // debug           
             cgen.setNiveau(niv);
             qgen.setNiveau(niv);           
          }
@@ -100,16 +99,16 @@ public class TPJAVA3 extends Application {
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
         tabs.getTabs().add(tabQuestion);
-        
+
         // Gestion de la fermeture des onglets
         // L'onglet est désactivé lorsqu'il est fermé
-        tabDessin.setOnClosed(e->{
+        tabDessin.setOnClosed(e -> {
             tabDessin.setDisable(true);
         });
-        tabCalcul.setOnClosed(e->{
+        tabCalcul.setOnClosed(e -> {
             tabCalcul.setDisable(true);
         });
-        tabQuestion.setOnClosed(e->{
+        tabQuestion.setOnClosed(e -> {
             tabQuestion.setDisable(true);
         });
         // Appel des différents onglets quand cliqué dans le menu
@@ -122,7 +121,7 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabDessin);
-              
+
         });
         calcul.setOnAction(e -> {
             // Si l'onglet est désactivé, on le réactive et on l'ouvre
@@ -133,7 +132,7 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabCalcul);
-              
+
         });
         question.setOnAction(e -> {
             // Si l'onglet est désactivé, on le réactive et on l'ouvre
@@ -144,16 +143,14 @@ public class TPJAVA3 extends Application {
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
             selectionModel.select(tabQuestion);
-              
+
         });
         // Appel de la fenetre popup pour la connexion
         connexion.setOnAction(event -> {
             pop = new Popup();
-      /*      pop.login();
-            String s = null;
-            if (pop.verifLogin(s) == true) {
+            if (pop.login() == true) {
                 tabs.getTabs().add(new Administration());
-            } */
+            }
         });
 
         root.setTop(menubar);

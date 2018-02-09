@@ -19,7 +19,7 @@ public class Popup extends Parent {
 
     }
 
-    public boolean login(String s) {
+    public boolean login() {
         String mdpValue = null;
         String key = "MotDePasse";
         TextInputDialog dialog = new TextInputDialog();
@@ -34,7 +34,6 @@ public class Popup extends Parent {
                 mdpProp.load(in);
 
                 mdpValue = mdpProp.getProperty(key);
-                System.out.println(key + " = " + mdpProp.getProperty(key));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -42,7 +41,13 @@ public class Popup extends Parent {
             }
 
         }
-        return (s.equals(mdpValue));
+        String mdpSaisie = login.get();
+        if (!mdpSaisie.equals(mdpValue)) {
+            this.alertMdp();
+            mdpSaisie=" ";
+            this.login();
+        }
+        return true;
     }
 
     public void alertSauv() {
@@ -66,6 +71,14 @@ public class Popup extends Parent {
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText("Veuillez saisir tous les champs !");
+        alert.showAndWait();
+    }
+
+    public void alertMdp() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Mot de passe incorrect !");
         alert.showAndWait();
     }
 
