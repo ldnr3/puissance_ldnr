@@ -102,7 +102,8 @@ public class Dessin extends Tab {
 
         //=== Début de la partie Pinceau de la ToolBar
         Label formeLab = new Label("Pinceau");
-        formeLab.setFont(new Font("Arial", 15));
+        formeLab.setFont(new Font("Serif Bold", 20));
+        formeLab.setUnderline(true);
 
         formeLab.setTranslateX(55);
         formeLab.setTranslateY(10);
@@ -144,8 +145,19 @@ public class Dessin extends Tab {
         Button enregistrement = new Button("Enregistrer");
         enregistrement.setEffect(new DropShadow(5, couleur));
         enregistrement.setFont(new Font("Arial", 15));
+
         enregistrement.setTranslateX(40);
         enregistrement.setTranslateY(40);
+
+        // Souligne les texte du bouton quand la souris est dessus
+        enregistrement.setOnMouseEntered(e -> {
+            enregistrement.setUnderline(true);
+        });
+        
+        // Retire le soulignement quand la souris sort
+        enregistrement.setOnMouseExited(e -> {
+            enregistrement.setUnderline(false);
+        });
 
         enregistrement.setOnAction((ActionEvent t) -> {
             FileChooser fileChooser = new FileChooser();
@@ -179,6 +191,17 @@ public class Dessin extends Tab {
         effacer.setFont(new Font("Arial", 15));
         effacer.setTranslateX(55);
         effacer.setTranslateY(50);
+        
+        // Souligne les texte du bouton quand la souris est dessus
+        effacer.setOnMouseEntered(e -> {
+            effacer.setUnderline(true);
+        });
+        
+        // Retire le soulignement quand la souris sort
+        effacer.setOnMouseExited(e -> {
+            effacer.setUnderline(false);
+        });
+        
         outils.getItems().add(enregistrement);
         outils.getItems().add(effacer);
 
