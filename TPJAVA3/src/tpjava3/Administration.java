@@ -65,6 +65,7 @@ public class Administration extends Tab {
         chNiveau1.setToggleGroup(group);
         chNiveau2.setToggleGroup(group);
         chNiveau1.setSelected(true);
+        valNiv=1;
         VBox nhb = new VBox();
         nhb.getChildren().addAll(this.chNiveau1, this.chNiveau2);
         nhb.setSpacing(5);
@@ -79,9 +80,7 @@ public class Administration extends Tab {
                     valNiv = 1;
                 } else {
                     valNiv = 2;
-
                 }
-
             }
         });
 

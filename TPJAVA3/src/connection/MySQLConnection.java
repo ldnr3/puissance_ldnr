@@ -1,47 +1,48 @@
 package connection;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tpjava3.Popup;
 
 public class MySQLConnection {
 
-    /**
-     * URL de connection
-     
-     */
-    private static final String HOST = "172.16.0.48";
-    private static final String PORT = "3306";
-    private static final String DATABASE = "dsig3";  // BDD Rached = "question"
-    private static final String URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
-    /**
-     * Nom du user
-     */
-    private static final String USER = "dsig3";
-    /**
-     * Mot de passe du user
-     */
-    private static final String PASSWORD = "dsig3";
-    /**
-     * Objet Connection
-     */
+    private static String HOST;
+    private static String PORT;
+    private static String DATABASE;
+    private static String URL;
+    private static String USER;
+    private static String PASSWORD;
+
     private static Connection connection;
 
     private MySQLConnection() {
     }
 
-    /**
-     * Méthode qui va nous retourner notre instance et la créer si elle n'existe
-     * pas...
-     *
-     * @return la connexion vers la base de donnée ou null
-     */
     public static Connection getInstance() {
         if (connection == null) {
-            try {
+            try (FileReader in = new FileReader("TP3PropertiesIn")) {
+                Properties valProp = new Properties();
+                valProp.load(in);
+
+                HOST = valProp.getProperty("host");
+                PORT = "3306";
+                DATABASE = valProp.getProperty("database");
+                URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+                USER = valProp.getProperty("user");
+                PASSWORD = valProp.getProperty("dbpassword");
+
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Popup.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
