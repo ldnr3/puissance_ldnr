@@ -17,6 +17,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -43,8 +47,17 @@ public class TPJAVA3 extends Application {
         Menu admin = new Menu("_Administration");
         // MenuItem du Menu activite
         MenuItem dessin = new MenuItem("Dessin");
+        dessin.setAccelerator(
+            new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN)
+        );
         MenuItem calcul = new MenuItem("Calcul");
+        dessin.setAccelerator(
+            new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN)
+        );
         MenuItem question = new MenuItem("Question-Réponse");
+        dessin.setAccelerator(
+            new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN)
+        );
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
 
