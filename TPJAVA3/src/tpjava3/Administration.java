@@ -94,6 +94,7 @@ public class Administration extends Tab {
         Label qLabel = new Label("Question : ");
         qLabel.setFont(new Font("Arial", 35));
         this.chQuestion = new TextField("");
+        this.chQuestion.setFont(new Font("Arial", 35));
         chQuestion.setPrefWidth(400);
         HBox qhb = new HBox();
         qhb.getChildren().addAll(qLabel, this.chQuestion);
@@ -103,6 +104,7 @@ public class Administration extends Tab {
         Label rLabel = new Label("Réponse : ");
         rLabel.setFont(new Font("Arial", 35));
         this.chReponse = new TextField("");
+        this.chReponse.setFont(new Font("Arial", 35));
         chReponse.setPrefWidth(400);
         HBox rhb = new HBox();
         rhb.getChildren().addAll(rLabel, this.chReponse);
