@@ -68,6 +68,11 @@ public class TPJAVA3 extends Application {
         RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
         niv2.setUserData(2);
         niv2.setToggleGroup(groupNiveau);
+        
+        // *** Sélection initiale du niveau : Niveau 1
+        groupNiveau.selectToggle(niv1);
+        cgen.setNiveau(1);
+        qgen.setNiveau(1);
        
         groupNiveau.selectedToggleProperty().addListener(
          (ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
