@@ -58,7 +58,6 @@ public class Dessin extends Tab {
     private boolean dragged = false;
 
     Dessin() {
-
         BorderPane tabDessin = new BorderPane();
         tabDessin.setBackground(new Background(new BackgroundFill(Color.DIMGRAY,
                 CornerRadii.EMPTY, Insets.EMPTY)));
@@ -67,9 +66,9 @@ public class Dessin extends Tab {
         StackPane conteneur = new StackPane();
         conteneur.setBackground(new Background(new BackgroundFill(Color.WHITE,
                 CornerRadii.EMPTY, Insets.EMPTY)));
-        conteneur.setMaxSize(575, 300);
+        conteneur.setMaxSize(950, 650);
         // Création d'un canevas pour avoir une zone de dessin       
-        final Canvas canvas = new Canvas(575, 300);
+        final Canvas canvas = new Canvas(950, 650);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         // Création d'une ToolBar pour ajouter les outils couleur, forme et effacer
@@ -78,14 +77,14 @@ public class Dessin extends Tab {
         outils.setOrientation(Orientation.VERTICAL);
         //=== Début de la partie couleur de la ToolBar
         Label couleurLab = new Label("Couleur");
-        couleurLab.setFont(new Font("Arial", 15));
+        couleurLab.setFont(new Font("Arial", 20));
 
         couleurLab.setTranslateX(55);
         outils.getItems().add(couleurLab);
 
         // Création de la sélection des couleurs
         final ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setMinHeight(25);
+        colorPicker.setMinHeight(35);
         colorPicker.setOnAction(new EventHandler() {
             public void handle(Event t) {
                 couleur = colorPicker.getValue();
@@ -99,20 +98,21 @@ public class Dessin extends Tab {
 
         //=== Separateur couleur/pinceau
         final Separator sepCouleur = new Separator();
-        sepCouleur.setTranslateY(5);
+        sepCouleur.setTranslateY(30);
         outils.getItems().add(sepCouleur);
 
         //=== Début de la partie Pinceau de la ToolBar
         Label formeLab = new Label("Pinceau");
-        formeLab.setFont(new Font("Serif Bold", 20));
-        formeLab.setUnderline(true);
+        formeLab.setFont(new Font("Arial", 20));
 
-        formeLab.setTranslateX(55);
-        formeLab.setTranslateY(10);
+        formeLab.setTranslateX(50);
+        formeLab.setTranslateY(35);
         outils.getItems().add(formeLab);
         // Création des RadioButton pour le choix de la forme du pinceau
         RadioButton carre = new RadioButton("Carré");
+        carre.setFont(new Font("Arial", 15));
         RadioButton rond = new RadioButton("Rond");
+        rond.setFont(new Font("Arial", 15));
         ToggleGroup formeG = new ToggleGroup();
 
         // ==== Image du choix carre ==== \\
@@ -133,14 +133,14 @@ public class Dessin extends Tab {
 
         rond.setGraphic(rondImageView);
         rond.setToggleGroup(formeG);
-        carre.setTranslateY(8);
-        rond.setTranslateY(10);
+        carre.setTranslateY(50);
+        rond.setTranslateY(60);
 
         outils.getItems().addAll(carre, rond);
 
         //=== Fin de la partie Pinceau de la ToolBar
         final Separator sepForme = new Separator();
-        sepForme.setTranslateY(15);
+        sepForme.setTranslateY(75);
         outils.getItems().add(sepForme);
 
         //================ Création du bouton pour enregistrer le dessin =====\\
@@ -149,7 +149,7 @@ public class Dessin extends Tab {
         enregistrement.setFont(new Font("Arial", 15));
 
         enregistrement.setTranslateX(40);
-        enregistrement.setTranslateY(40);
+        enregistrement.setTranslateY(200);
 
         // Souligne les texte du bouton quand la souris est dessus
         enregistrement.setOnMouseEntered(e -> {
@@ -162,7 +162,8 @@ public class Dessin extends Tab {
             enregistrement.setUnderline(false);
             enregistrement.setCursor(Cursor.DEFAULT);
         });
-
+        
+        // Création de l'action de sauvegarde
         enregistrement.setOnAction((ActionEvent t) -> {
             FileChooser fileChooser = new FileChooser();
 
@@ -178,7 +179,7 @@ public class Dessin extends Tab {
 
             if (file != null) {
                 try {
-                    WritableImage writableImage = new WritableImage(600, 300);
+                    WritableImage writableImage = new WritableImage(950, 650);
                     canvas.snapshot(null, writableImage);
                     // Conversion d'une imageFX vers Swing pour se servir de
                     // l'interface RenderedImage
@@ -190,11 +191,12 @@ public class Dessin extends Tab {
             }
         });
 
+        // Création du bouton Effacer
         Button effacer = new Button("Effacer");
         effacer.setEffect(new DropShadow(5, couleur));
         effacer.setFont(new Font("Arial", 15));
         effacer.setTranslateX(55);
-        effacer.setTranslateY(50);
+        effacer.setTranslateY(210);
 
         // Souligne les texte du bouton quand la souris est dessus
         effacer.setOnMouseEntered(e -> {
@@ -252,9 +254,9 @@ public class Dessin extends Tab {
             if (!dragged) {
                 gc.setFill(couleur);
                 if (forme.equals("carre")) {
-                    gc.fillRect(t.getX()-10, t.getY()-10, 20, 20);
+                    gc.fillRect(t.getX()-50, t.getY()-50, 100, 100);
                 } else if (forme.equals("rond")) {
-                    gc.fillOval(t.getX(), t.getY(), 20, 20);
+                    gc.fillOval(t.getX()-50, t.getY()-50, 100, 100);
                 }
                 
             }

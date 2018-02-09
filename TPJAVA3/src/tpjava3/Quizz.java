@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
@@ -36,24 +37,29 @@ public class Quizz extends Tab {
         // **** Composant Graphique : Question
         
         Label qLabel = new Label("Question : ");
+        qLabel.setFont(new Font("Arial", 35));
         this.enonce = new Text(this.qgen.getQuestion());
         HBox qhb = new HBox();
         qhb.getChildren().addAll(qLabel,this.enonce);
+        this.enonce.setFont(new Font("Arial", 35));
         qhb.setSpacing(20);
         qhb.setAlignment(Pos.CENTER);
         
         // *** Composant Graphique : Reponse
         
         Label rLabel = new Label("Réponse : ");
+        rLabel.setFont(new Font("Arial", 35));
         this.reponseUsr = new TextField();
         HBox rhb = new HBox();
         rhb.getChildren().addAll(rLabel,this.reponseUsr);
+        this.reponseUsr.setFont(new Font("Arial", 35));
         rhb.setSpacing(20);
         rhb.setAlignment(Pos.CENTER);
         
          // **** Composant Graphique : Solution
         
         Label sLabel = new Label("Solution : ");
+        sLabel.setFont(new Font("Arial", 35));
         Text sol = new Text(this.qgen.getReponse());
         HBox shb = new HBox();
         shb.getChildren().addAll(sLabel,sol);
@@ -64,6 +70,7 @@ public class Quizz extends Tab {
         // *** Bouton Solution
         
         this.solution = new Button(ctrlBttnLabel[0]);
+        this.solution.setFont(new Font("Arial", 35));
         this.solution.setOnAction(
             (ActionEvent e) -> {
                 
@@ -86,6 +93,7 @@ public class Quizz extends Tab {
         // *** Bouton Verifier
         
         this.verifier = new Button(ctrlBttnLabel[1]);
+        this.verifier.setFont(new Font("Arial", 35));
         this.verifier.setOnAction(
             (ActionEvent e) -> {
  
@@ -109,6 +117,7 @@ public class Quizz extends Tab {
         // *** Bouton Autre
         
         this.autreQuestion = new Button(ctrlBttnLabel[2]);
+        this.autreQuestion.setFont(new Font("Arial", 35));
         this.autreQuestion.setOnAction(
             (ActionEvent e) -> {
                 

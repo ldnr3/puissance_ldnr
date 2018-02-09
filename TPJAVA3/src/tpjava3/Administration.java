@@ -20,6 +20,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class Administration extends Tab {
 
@@ -41,6 +42,7 @@ public class Administration extends Tab {
         ObservableList<String> numQuestion
                 = FXCollections.observableArrayList();
         numQuestion.add("Question n°");
+        
 
         QuestionBDD quest1 = new QuestionBDD();
         for (int i = 1; i <= questiondao.compter(); i++) {
@@ -48,8 +50,10 @@ public class Administration extends Tab {
         }
 
         this.chNum = new ComboBox(numQuestion);
+        this.chNum.setMinHeight(50);
         chNum.getSelectionModel().selectFirst();
         Label nlabel = new Label("Si modification");
+        nlabel.setFont(new Font("Arial", 35));
         nlabel.setTranslateX(23);
         nlabel.setTranslateY(0);
 
@@ -62,6 +66,8 @@ public class Administration extends Tab {
         final ToggleGroup group = new ToggleGroup();
         this.chNiveau1 = new RadioButton("Niveau 1");
         this.chNiveau2 = new RadioButton("Niveau 2");
+        this.chNiveau1.setFont(new Font("Arial", 35));
+        this.chNiveau2.setFont(new Font("Arial", 35));
         chNiveau1.setToggleGroup(group);
         chNiveau2.setToggleGroup(group);
         chNiveau1.setSelected(true);
@@ -86,6 +92,7 @@ public class Administration extends Tab {
 
         // champs de saisie question/reponse
         Label qLabel = new Label("Question : ");
+        qLabel.setFont(new Font("Arial", 35));
         this.chQuestion = new TextField("");
         chQuestion.setPrefWidth(400);
         HBox qhb = new HBox();
@@ -94,6 +101,7 @@ public class Administration extends Tab {
         qhb.setAlignment(Pos.CENTER);
 
         Label rLabel = new Label("Réponse : ");
+        rLabel.setFont(new Font("Arial", 35));
         this.chReponse = new TextField("");
         chReponse.setPrefWidth(400);
         HBox rhb = new HBox();
@@ -103,7 +111,9 @@ public class Administration extends Tab {
 
         // boutons
         this.btnEnregistrer = new Button("Enregister");
+        this.btnEnregistrer.setFont(new Font("Arial", 35));
         this.btnModifier = new Button("Modifier");
+        this.btnModifier.setFont(new Font("Arial", 35));
         HBox bhb = new HBox();
         bhb.getChildren().addAll(this.btnEnregistrer, this.btnModifier);
         bhb.setSpacing(20);

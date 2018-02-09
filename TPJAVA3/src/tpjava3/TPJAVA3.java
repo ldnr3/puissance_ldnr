@@ -37,7 +37,7 @@ public class TPJAVA3 extends Application {
         
         BorderPane root = new BorderPane();
 
-        Scene scene = new Scene(root, 800, 400);
+        Scene scene = new Scene(root, 1200, 800);
 
         // Création de la Menubar
         MenuBar menubar = new MenuBar();
@@ -106,11 +106,12 @@ public class TPJAVA3 extends Application {
 
         // Assignation des menu à la menubar
         menubar.getMenus().addAll(activite, niveau, admin);
-
+        
+        // Création de la barre des onglets
         TabPane tabs = new TabPane();
         // Personnalisation de la taille des onglets
-        tabs.setTabMinWidth(125);
-        tabs.setTabMinHeight(30);
+        tabs.setTabMinWidth(200);
+        tabs.setTabMinHeight(50);
         // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
                 
