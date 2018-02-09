@@ -61,6 +61,7 @@ public class Quizz extends Tab {
         Label sLabel = new Label("Solution : ");
         sLabel.setFont(new Font("Arial", 35));
         Text sol = new Text(this.qgen.getReponse());
+        sol.setFont(new Font("Arial", 35));
         HBox shb = new HBox();
         shb.getChildren().addAll(sLabel,sol);
         shb.setSpacing(20);
