@@ -55,6 +55,7 @@ public class Dessin extends Tab {
 
     private Color couleur = Color.BLACK;
     private String forme = "carre";
+    private boolean dragged = false;
 
     Dessin() {
 
@@ -155,7 +156,7 @@ public class Dessin extends Tab {
             enregistrement.setUnderline(true);
             enregistrement.setCursor(Cursor.HAND);
         });
-        
+
         // Retire le soulignement quand la souris sort
         enregistrement.setOnMouseExited(e -> {
             enregistrement.setUnderline(false);
@@ -194,19 +195,19 @@ public class Dessin extends Tab {
         effacer.setFont(new Font("Arial", 15));
         effacer.setTranslateX(55);
         effacer.setTranslateY(50);
-        
+
         // Souligne les texte du bouton quand la souris est dessus
         effacer.setOnMouseEntered(e -> {
             effacer.setUnderline(true);
             effacer.setCursor(Cursor.HAND);
         });
-        
+
         // Retire le soulignement quand la souris sort
         effacer.setOnMouseExited(e -> {
             effacer.setUnderline(false);
             effacer.setCursor(Cursor.DEFAULT);
         });
-        
+
         outils.getItems().add(enregistrement);
         outils.getItems().add(effacer);
 
@@ -231,15 +232,38 @@ public class Dessin extends Tab {
 
         });
         //======= Canvas =======\\
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, (MouseEvent t) -> {
-            gc.setFill(couleur);
-            if (forme.equals("carre")) {
-                gc.fillRect(t.getX(), t.getY(), 5, 5);
-            } else {
-                gc.fillOval(t.getX(), t.getY(), 5, 5);
-            }
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent t) -> {
 
+            gc.beginPath();
+            gc.lineTo(t.getX(), t.getY());
+            gc.stroke();
         });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, (MouseEvent t) -> {
+            //gc.beginPath();
+            dragged = true;
+            gc.lineTo(t.getX(), t.getY());
+            gc.setLineWidth(5);
+            gc.setStroke(couleur);
+            gc.stroke();
+        });
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent t) -> {
+            if (!dragged) {
+                gc.setFill(couleur);
+                if (forme.equals("carre")) {
+                    gc.fillRect(t.getX()-10, t.getY()-10, 20, 20);
+                } else if (forme.equals("rond")) {
+                    gc.fillOval(t.getX(), t.getY(), 20, 20);
+                }
+                
+            }
+            dragged = false;
+        });
+
+        /*canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent t) -> {
+            dragged = false;
+        });*/
 
         //Rectangle rect = new Rectangle(100, 100);
         conteneur.getChildren().add(canvas);
