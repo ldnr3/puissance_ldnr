@@ -67,6 +67,7 @@ public class Dessin extends Tab {
         conteneur.setBackground(new Background(new BackgroundFill(Color.WHITE,
                 CornerRadii.EMPTY, Insets.EMPTY)));
         conteneur.setMaxSize(950, 650);
+        
         // Création d'un canevas pour avoir une zone de dessin       
         final Canvas canvas = new Canvas(950, 650);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -75,6 +76,7 @@ public class Dessin extends Tab {
         ToolBar outils = new ToolBar();
         outils.setEffect(new DropShadow(10, 5, 0, couleur));
         outils.setOrientation(Orientation.VERTICAL);
+        
         //=== Début de la partie couleur de la ToolBar
         Label couleurLab = new Label("Couleur");
         couleurLab.setFont(new Font("Arial", 20));
@@ -108,6 +110,7 @@ public class Dessin extends Tab {
         formeLab.setTranslateX(50);
         formeLab.setTranslateY(35);
         outils.getItems().add(formeLab);
+        
         // Création des RadioButton pour le choix de la forme du pinceau
         RadioButton carre = new RadioButton("Carré");
         carre.setFont(new Font("Arial", 15));
@@ -219,6 +222,7 @@ public class Dessin extends Tab {
         effacer.setOnMouseClicked(e -> {
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         });
+        
         // Sélection de la forme du pinceau
         formeG.selectedToggleProperty().addListener(new ChangeListener() {
 
@@ -233,6 +237,7 @@ public class Dessin extends Tab {
             }
 
         });
+        
         //======= Canvas =======\\
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent t) -> {
 
@@ -240,7 +245,8 @@ public class Dessin extends Tab {
             gc.lineTo(t.getX(), t.getY());
             gc.stroke();
         });
-
+        
+        // Quand on fait glisser la souris on fait des traits
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, (MouseEvent t) -> {
             //gc.beginPath();
             dragged = true;
@@ -250,24 +256,21 @@ public class Dessin extends Tab {
             gc.stroke();
         });
 
+        // Quand on clique on fait un carré ou un rond
         canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent t) -> {
+            // Si la souris à glissé on ne fait pas de carré ou de rond
             if (!dragged) {
                 gc.setFill(couleur);
                 if (forme.equals("carre")) {
-                    gc.fillRect(t.getX()-50, t.getY()-50, 100, 100);
+                    gc.fillRect(t.getX()-35, t.getY()-35, 70, 70);
                 } else if (forme.equals("rond")) {
-                    gc.fillOval(t.getX()-50, t.getY()-50, 100, 100);
+                    gc.fillOval(t.getX()-35, t.getY()-35, 100, 70);
                 }
                 
             }
             dragged = false;
         });
 
-        /*canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent t) -> {
-            dragged = false;
-        });*/
-
-        //Rectangle rect = new Rectangle(100, 100);
         conteneur.getChildren().add(canvas);
         tabDessin.setLeft(outils);
         tabDessin.setCenter(conteneur);
