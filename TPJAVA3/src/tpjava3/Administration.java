@@ -31,6 +31,7 @@ public class Administration extends Tab {
     private final ComboBox chNum;
     private final Button btnEnregistrer;
     private final Button btnModifier;
+    private final Button btnEffacer;
     private int valNiv;
 
     public Administration() {
@@ -42,7 +43,6 @@ public class Administration extends Tab {
         ObservableList<String> numQuestion
                 = FXCollections.observableArrayList();
         numQuestion.add("Question n°");
-        
 
         QuestionBDD quest1 = new QuestionBDD();
         for (int i = 1; i <= questiondao.compter(); i++) {
@@ -71,7 +71,7 @@ public class Administration extends Tab {
         chNiveau1.setToggleGroup(group);
         chNiveau2.setToggleGroup(group);
         chNiveau1.setSelected(true);
-        valNiv=1;
+        valNiv = 1;
         VBox nhb = new VBox();
         nhb.getChildren().addAll(this.chNiveau1, this.chNiveau2);
         nhb.setSpacing(5);
@@ -92,7 +92,7 @@ public class Administration extends Tab {
 
         // champs de saisie question/reponse
         Label qLabel = new Label("Question : ");
-        qLabel.setFont(new Font("Arial", 20));
+        qLabel.setFont(new Font("Arial", 30));
         this.chQuestion = new TextField("");
         this.chQuestion.setFont(new Font("Arial", 15));
         chQuestion.setPrefWidth(400);
@@ -102,7 +102,7 @@ public class Administration extends Tab {
         qhb.setAlignment(Pos.CENTER);
 
         Label rLabel = new Label("Réponse : ");
-        rLabel.setFont(new Font("Arial", 20));
+        rLabel.setFont(new Font("Arial", 30));
         this.chReponse = new TextField("");
         this.chReponse.setFont(new Font("Arial", 15));
         chReponse.setPrefWidth(400);
@@ -113,11 +113,13 @@ public class Administration extends Tab {
 
         // boutons
         this.btnEnregistrer = new Button("Enregister");
-        this.btnEnregistrer.setFont(new Font("Arial", 20));
+        this.btnEnregistrer.setFont(new Font("Arial", 17));
         this.btnModifier = new Button("Modifier");
-        this.btnModifier.setFont(new Font("Arial", 20));
+        this.btnModifier.setFont(new Font("Arial", 17));
+        this.btnEffacer = new Button("Effacer");
+        this.btnEffacer.setFont(new Font("Arial", 17));
         HBox bhb = new HBox();
-        bhb.getChildren().addAll(this.btnEnregistrer, this.btnModifier);
+        bhb.getChildren().addAll(this.btnEnregistrer, this.btnModifier, btnEffacer);
         bhb.setSpacing(20);
         bhb.setAlignment(Pos.CENTER);
 
@@ -173,11 +175,21 @@ public class Administration extends Tab {
             }
 
         });
+
+        // TRAITEMENT BOUTON EFFACER
+        btnEffacer.setOnAction(event -> {
+
+            chNum.getSelectionModel().selectFirst();
+            chNiveau1.setSelected(true);
+            this.chQuestion.clear();
+            this.chReponse.clear();
+        });
+
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
 
             int numero = chNum.getSelectionModel().getSelectedIndex();
-            if (numero != 0)  {
+            if (numero != 0) {
                 QuestionBDD quest4 = new QuestionBDD();
                 quest4 = questiondao.getObj(numero);
                 this.chQuestion.setText(quest4.getEnonce());

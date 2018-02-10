@@ -1,5 +1,4 @@
 // AUTEURS : ALEXANDRE, FREDERIC ET RACHED
-
 package tpjava3;
 
 import javafx.application.Application;
@@ -19,6 +18,9 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import static javafx.scene.paint.Color.YELLOW;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +37,6 @@ public class TPJAVA3 extends Application {
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 1200, 800);
-
         // Création de la Menubar
         MenuBar menubar = new MenuBar();
         // Creation des menus de la barre
