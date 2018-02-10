@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// AUTEURS : ALEXANDRE, FREDERIC ET RACHED
+
 package tpjava3;
 
 import javafx.application.Application;
@@ -102,8 +99,9 @@ public class TPJAVA3 extends Application {
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
         MenuItem connexion = new MenuItem("Connexion");
-        admin.getItems().addAll(connexion);
-
+        MenuItem deconnexion = new MenuItem("Deconnexion");
+        admin.getItems().addAll(connexion, deconnexion);
+        deconnexion.setDisable(true);
         // Assignation des menu à la menubar
         menubar.getMenus().addAll(activite, niveau, admin);
 
@@ -176,15 +174,24 @@ public class TPJAVA3 extends Application {
                 // L'onglet est sélectionné
                 SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
                 selectionModel.select(tabAdmin);
+                // sous-menus connexion desactivé et deconnexion activé
                 connexion.setDisable(true);
+                deconnexion.setDisable(false);
+
+                // onglet Admin fermé -> réactivation connexion et désactivation déconnexion
                 tabAdmin.setOnClosed(e -> {
+                    selectionModel.select(tabDessin);
                     connexion.setDisable(false);
-
+                    deconnexion.setDisable(true);
                 });
-
             }
-
         });
+
+        // deconnexion
+        deconnexion.setOnAction(event -> {
+            start(primaryStage);
+        }
+        );
 
         root.setTop(menubar);
         root.setCenter(tabs);
@@ -194,9 +201,7 @@ public class TPJAVA3 extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
+// MAIN
     public static void main(String[] args) {
         launch(args);
     }
