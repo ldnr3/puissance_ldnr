@@ -34,7 +34,7 @@ public class TPJAVA3 extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        
+
         BorderPane root = new BorderPane();
 
         Scene scene = new Scene(root, 1200, 800);
@@ -48,30 +48,30 @@ public class TPJAVA3 extends Application {
         // MenuItem du Menu activite
         MenuItem dessin = new MenuItem("Dessin");
         dessin.setAccelerator(
-            new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN)
+                new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN)
         );
         MenuItem calcul = new MenuItem("Calcul");
         dessin.setAccelerator(
-            new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN)
+                new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN)
         );
         MenuItem question = new MenuItem("Question-Réponse");
         dessin.setAccelerator(
-            new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN)
+                new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN)
         );
         // Assignation du sous menu d'activite
         activite.getItems().addAll(dessin, calcul, question);
 
         // *** Onglet Calcul
-        String[] tcLabel = {"Solution","","Autre Calcul"};
-        Boolean[] tcVisibility = {true,false,true};
+        String[] tcLabel = {"Solution", "", "Autre Calcul"};
+        Boolean[] tcVisibility = {true, false, true};
         Calcul cgen = new Calcul(1);        // Niveau 1 par defaut
-        final Quizz tabCalcul = new Quizz("Calcul",cgen,tcLabel,tcVisibility);
-        
+        final Quizz tabCalcul = new Quizz("Calcul", cgen, tcLabel, tcVisibility);
+
         // *** Onglet Question
-        String[] tqLabel = {"Solution","Vérifier","Autre Question"};
-        Boolean[] tqVisibility = {true,true,true};
+        String[] tqLabel = {"Solution", "Vérifier", "Autre Question"};
+        Boolean[] tqVisibility = {true, true, true};
         Question qgen = new Question(1);    // Niveau 1 par defaut
-        Quizz tabQuestion = new Quizz("Question",qgen,tqLabel,tqVisibility);
+        Quizz tabQuestion = new Quizz("Question", qgen, tqLabel, tqVisibility);
 
         ToggleGroup groupNiveau = new ToggleGroup();
         // MenuItem du Menu niveau
@@ -81,23 +81,23 @@ public class TPJAVA3 extends Application {
         RadioMenuItem niv2 = new RadioMenuItem("Niveau 2");
         niv2.setUserData(2);
         niv2.setToggleGroup(groupNiveau);
-        
+
         // *** Sélection initiale du niveau : Niveau 1
         groupNiveau.selectToggle(niv1);
         cgen.setNiveau(1);
         qgen.setNiveau(1);
-       
+
         groupNiveau.selectedToggleProperty().addListener(
-         (ObservableValue<? extends Toggle> ov, Toggle old_toggle, 
-        Toggle new_toggle) -> {
-        if (groupNiveau.getSelectedToggle() != null) {
-            int niv = (int)groupNiveau.getSelectedToggle().getUserData();
+                (ObservableValue<? extends Toggle> ov, Toggle old_toggle,
+                        Toggle new_toggle) -> {
+                    if (groupNiveau.getSelectedToggle() != null) {
+                        int niv = (int) groupNiveau.getSelectedToggle().getUserData();
 //          System.out.println("Niveau sélectionné : " + niv);  // debug           
-            cgen.setNiveau(niv);
-            qgen.setNiveau(niv);           
-         }
-        });
-        
+                        cgen.setNiveau(niv);
+                        qgen.setNiveau(niv);
+                    }
+                });
+
         //Assignation du sous menu de niveau
         niveau.getItems().addAll(niv1, niv2);
         //Assignation du sous menu Connexion
@@ -106,7 +106,7 @@ public class TPJAVA3 extends Application {
 
         // Assignation des menu à la menubar
         menubar.getMenus().addAll(activite, niveau, admin);
-        
+
         // Création de la barre des onglets
         TabPane tabs = new TabPane();
         // Personnalisation de la taille des onglets
@@ -114,7 +114,7 @@ public class TPJAVA3 extends Application {
         tabs.setTabMinHeight(50);
         // Création des trois onglets principaux
         Dessin tabDessin = new Dessin();
-                
+
         tabs.getTabs().add(tabDessin);
         tabs.getTabs().add(tabCalcul);
         tabs.getTabs().add(tabQuestion);
@@ -130,6 +130,7 @@ public class TPJAVA3 extends Application {
         tabQuestion.setOnClosed(e -> {
             tabQuestion.setDisable(true);
         });
+
         // Appel des différents onglets quand cliqué dans le menu
         dessin.setOnAction(e -> {
             // Si l'onglet est désactivé, on le réactive et on l'ouvre
@@ -158,6 +159,7 @@ public class TPJAVA3 extends Application {
             if (tabQuestion.isDisable()) {
                 tabQuestion.setDisable(false);
                 tabs.getTabs().add(tabQuestion);
+
             }
             // L'onglet est sélectionné
             SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
@@ -165,11 +167,23 @@ public class TPJAVA3 extends Application {
 
         });
         // Appel de la fenetre popup pour la connexion
+        // Onglet Administration crée si login OK
         connexion.setOnAction(event -> {
             pop = new Popup();
             if (pop.login() == true) {
-                tabs.getTabs().add(new Administration());
+                Administration tabAdmin = new Administration();
+                tabs.getTabs().add(tabAdmin);
+                // L'onglet est sélectionné
+                SingleSelectionModel<Tab> selectionModel = tabs.getSelectionModel();
+                selectionModel.select(tabAdmin);
+                connexion.setDisable(true);
+                tabAdmin.setOnClosed(e -> {
+                    connexion.setDisable(false);
+
+                });
+
             }
+
         });
 
         root.setTop(menubar);

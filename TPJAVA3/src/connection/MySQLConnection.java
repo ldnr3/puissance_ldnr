@@ -30,13 +30,21 @@ public class MySQLConnection {
             try (FileReader in = new FileReader("TP3PropertiesIn")) {
                 Properties valProp = new Properties();
                 valProp.load(in);
+                
+                HOST = "127.0.0.1";
+                PORT = "3306";
+                DATABASE = "question";
+                URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
+                USER = "root";
+                PASSWORD = "1234512345";
 
-                HOST = valProp.getProperty("host");
+          /*      HOST = valProp.getProperty("host");
                 PORT = "3306";
                 DATABASE = valProp.getProperty("database");
                 URL = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
                 USER = valProp.getProperty("user");
-                PASSWORD = valProp.getProperty("dbpassword");
+                PASSWORD = valProp.getProperty("dbpassword");*/
+                
 
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (FileNotFoundException ex) {
