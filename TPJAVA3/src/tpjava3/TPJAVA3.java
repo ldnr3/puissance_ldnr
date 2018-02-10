@@ -198,6 +198,7 @@ public class TPJAVA3 extends Application {
         root.setCenter(tabs);
 
         primaryStage.setTitle("Jeux d'Enfants");
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
