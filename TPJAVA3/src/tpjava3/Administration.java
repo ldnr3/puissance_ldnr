@@ -1,5 +1,4 @@
 // AUTEUR : Rached, groupe 3
-
 package tpjava3;
 
 import DAO.DAO;
@@ -30,7 +29,7 @@ public class Administration extends Tab {
     private final RadioButton chNiveau1;
     private final RadioButton chNiveau2;
     private final ComboBox chNum;
-    private final Button btnEnregistrer;
+    private final Button btnAjouter;
     private final Button btnModifier;
     private final Button btnEffacer;
     private int valNiv;
@@ -101,7 +100,6 @@ public class Administration extends Tab {
         qhb.getChildren().addAll(qLabel, this.chQuestion);
         qhb.setSpacing(5);
         qhb.setAlignment(Pos.CENTER);
-
         Label rLabel = new Label("Réponse : ");
         rLabel.setFont(new Font("Arial", 30));
         this.chReponse = new TextField("");
@@ -113,14 +111,14 @@ public class Administration extends Tab {
         rhb.setAlignment(Pos.CENTER);
 
         // boutons
-        this.btnEnregistrer = new Button("Enregister");
-        this.btnEnregistrer.setFont(new Font("Arial", 17));
+        this.btnAjouter = new Button("Ajouter");
+        this.btnAjouter.setFont(new Font("Arial", 17));
         this.btnModifier = new Button("Modifier");
         this.btnModifier.setFont(new Font("Arial", 17));
         this.btnEffacer = new Button("Effacer");
         this.btnEffacer.setFont(new Font("Arial", 17));
         HBox bhb = new HBox();
-        bhb.getChildren().addAll(this.btnEnregistrer, this.btnModifier, btnEffacer);
+        bhb.getChildren().addAll(this.btnAjouter, this.btnModifier, btnEffacer);
         bhb.setSpacing(20);
         bhb.setAlignment(Pos.CENTER);
 
@@ -130,13 +128,11 @@ public class Administration extends Tab {
         vb.setAlignment(Pos.CENTER);
 
         BorderPane bp = new BorderPane();
-
         bp.setCenter(vb);
-
         this.setContent(bp);
 
-        // TRAITEMENT BOUTON ENREGISTRER
-        btnEnregistrer.setOnAction(event -> {
+        // TRAITEMENT BOUTON Ajouter
+        btnAjouter.setOnAction(event -> {
             QuestionBDD quest2 = questiondao.create(
                     new QuestionBDD(null, this.chQuestion.getText(), this.chReponse.getText(), valNiv));
             Popup pop = new Popup();
@@ -149,7 +145,6 @@ public class Administration extends Tab {
                 pop.alertInfo();
                 chNiveau1.setSelected(true);
             }
-
         });
 
         // TRAITEMENT BOUTON MODIFIER
@@ -174,7 +169,6 @@ public class Administration extends Tab {
                 chNum.getSelectionModel().selectFirst();
                 chNiveau1.setSelected(true);
             }
-
         });
 
         // TRAITEMENT BOUTON EFFACER
@@ -188,7 +182,6 @@ public class Administration extends Tab {
 
         // TRAITEMENT SELECTION N° QUESTION
         chNum.setOnAction(event -> {
-
             int numero = chNum.getSelectionModel().getSelectedIndex();
             if (numero != 0) {
                 QuestionBDD quest4 = new QuestionBDD();
@@ -202,9 +195,6 @@ public class Administration extends Tab {
                     chNiveau2.setSelected(true);
                 }
             }
-
         });
-
     }
-
 }
